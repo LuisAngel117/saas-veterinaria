@@ -9,5 +9,6 @@ Regla: DONE solo tras validación local del usuario con evidencia en `docs/log/l
 | T2 | Docs base reales + contratos | READY_FOR_VALIDATION | TBD | BRD/arquitectura/seguridad/dominio/UX/runbook |
 | T3 | Governance + ADR/RFC + AGENTS + coherencia agenda | READY_FOR_VALIDATION | TBD | DoR/DoD + ADRs + fix agenda |
 | T4 | BRD-REQ + RTM + state + masters BACK/FRONT (DRAFT) | READY_FOR_VALIDATION | TBD | Pendiente aceptación textual de masters |
+| AUDIT-BACK-001 | Resumen técnico + auditoría de huecos/inconsistencias plan maestro BACK | READY_FOR_VALIDATION | 2f8bd240eb75ba4d4a73baa796ee2f8bfafca4ee | Documento: docs/state/audit-back-master-001.md |
 
 <!-- EOF -->
