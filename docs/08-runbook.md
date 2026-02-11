@@ -1,21 +1,29 @@
-# Runbook (operación local)
+# Runbook (operacion local)
 
 ## Prerequisitos
-TBD
+- Git.
+- PowerShell 7+.
+- Stack objetivo para implementacion: Java 21, Node.js LTS, Postgres 17.
 
 ## DB local (Postgres 17)
-TBD
+Estado actual: pendiente de scripts operativos en repo.
+- Regla: cuando se agreguen scripts reales, este documento y `docs/state/state.md` deben actualizarse en la misma tanda.
 
 ## Levantar backend
-TBD
+Estado actual: pendiente de implementacion de backend.
+- No existen comandos canonicos en este repo aun.
 
 ## Levantar frontend
-TBD
+Estado actual: pendiente de implementacion de frontend.
+- No existen comandos canonicos en este repo aun.
 
 ## Troubleshooting
-TBD
+- Si falla EOF: ejecutar `powershell -ExecutionPolicy Bypass -File scripts/verify/verify-docs-eof.ps1`.
+- Si hay dudas de entorno/repositorio: ejecutar `powershell -ExecutionPolicy Bypass -File scripts/verify/preflight.ps1`.
+- Si `git status --porcelain` no esta limpio, detener tanda y resolver antes de continuar.
 
-## Scripts “verdad”
-TBD
+## Scripts "verdad"
+- `scripts/verify/verify-docs-eof.ps1`
+- `scripts/verify/preflight.ps1`
 
 <!-- EOF -->
