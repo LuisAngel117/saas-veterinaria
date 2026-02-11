@@ -1,7 +1,10 @@
-# Status
+# Status (tabla de control)
 
-| Item | Estado | Evidencia | Actualizado |
-|---|---|---|---|
-| T1 | READY_FOR_VALIDATION | 9d3c6c8e6a9fbcb9e9edb7919ef0daad88a4b83f | 2026-02-11 |
+Estados permitidos: NOT_STARTED | IN_PROGRESS | READY_FOR_VALIDATION | DONE | BLOCKED  
+Regla: DONE solo tras validación local del usuario con evidencia en `docs/log/log.md`.
+
+| Sprint/Tanda | Título | Estado | Evidencia (commit) | Notas |
+|---|---|---|---|---|
+| T1 | Bootstrap docs/scripts + project-lock | IN_PROGRESS | TBD | Se completa al aplicar T1 (Codex) |
 
 <!-- EOF -->

@@ -1,11 +1,23 @@
-# Log
+# Bitácora (append-only)
 
-Formato: [YYYY-MM-DD HH:mm:ssZ] evento.
+Formato por entrada:
+- Fecha/hora (America/Guayaquil)
+- Sprint/Tanda
+- Qué cambió (bullets)
+- Comandos ejecutados
+- Output (pegar aquí)
+- Resultado
 
-[2026-02-11 00:00:00Z] Bootstrap inicial de estructura docs/scripts.
-
-<!-- EOF -->
-
-[2026-02-11 12:13:44Z] T1 aplicado.
+## 2026-02-11T00:00:00-05:00 (America/Guayaquil)
+- Sprint/Tanda: T1
+- Qué cambió:
+  - Bootstrap estructura docs/scripts (placeholders canónicos)
+  - Se agregó verificador EOF y preflight
+- Comandos ejecutados:
+  - TBD (lo llenará Codex al aplicar)
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - IN_PROGRESS (se marcará READY_FOR_VALIDATION al aplicar y validar scripts)
 
 <!-- EOF -->

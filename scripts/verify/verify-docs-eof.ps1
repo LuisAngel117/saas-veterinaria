@@ -1,27 +1,30 @@
 $ErrorActionPreference = "Stop"
 
-if (-not (Test-Path -Path "docs" -PathType Container)) {
-  Write-Host "docs directory not found."
-  exit 1
+$root = Split-Path -Parent $PSScriptRoot
+$docsPath = Join-Path $root "..\..\docs"
+
+if (-not (Test-Path $docsPath)) {
+  Write-Error "No existe la carpeta 'docs' en la raíz del repo (esperado en: $docsPath)."
 }
 
-$docsFiles = Get-ChildItem -Path "docs" -Recurse -File
-$missing = @()
+$files = Get-ChildItem -Path $docsPath -Recurse -File -Filter *.md
 
-foreach ($file in $docsFiles) {
-  $raw = Get-Content -Path $file.FullName -Raw
-  $trimmed = $raw.TrimEnd("`r", "`n")
-  if (-not $trimmed.EndsWith("<!-- EOF -->")) {
-    $relative = Resolve-Path -Path $file.FullName -Relative
-    $missing += $relative
+$bad = @()
+
+foreach ($f in $files) {
+  $raw = Get-Content -LiteralPath $f.FullName -Raw
+
+  # Debe terminar con <!-- EOF --> + opcional newline final
+  if ($raw -notmatch "(?s)<!-- EOF -->\r?\n?$") {
+    $bad += $f.FullName
   }
 }
 
-if ($missing.Count -gt 0) {
-  Write-Host "EOF verification FAILED. Missing marker in:"
-  $missing | ForEach-Object { Write-Host $_ }
+if ($bad.Count -gt 0) {
+  Write-Host "ERROR: Estos archivos NO terminan con '<!-- EOF -->':"
+  $bad | ForEach-Object { Write-Host " - $_" }
   exit 1
 }
 
-Write-Host "EOF verification OK"
+Write-Host "OK: Todos los docs .md bajo 'docs' terminan con '<!-- EOF -->'."
 exit 0

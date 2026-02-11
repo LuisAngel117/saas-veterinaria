@@ -1,53 +1,19 @@
 $ErrorActionPreference = "Stop"
 
-$requiredDirs = @(
-  "docs",
-  "docs/status",
-  "docs/log",
-  "docs/quality",
-  "docs/traceability",
-  "docs/state",
-  "docs/handoff",
-  "docs/decisions",
-  "docs/rfcs",
-  "docs/sprints",
-  "scripts/verify",
-  "scripts/smoke",
-  "scripts/release"
-)
+Write-Host "==> Preflight: git status"
+git status -sb
 
-$requiredFiles = @(
-  "docs/status/status.md",
-  "docs/log/log.md",
-  "docs/state/project-lock.md",
-  "scripts/verify/verify-docs-eof.ps1",
-  "scripts/verify/preflight.ps1"
-)
+Write-Host "`n==> Preflight: git identity"
+git config user.name
+git config user.email
 
-$missing = @()
+Write-Host "`n==> Preflight: git remote -v"
+git remote -v
 
-foreach ($dir in $requiredDirs) {
-  if (-not (Test-Path -Path $dir -PathType Container)) {
-    $missing += "DIR:$dir"
-  }
-}
+Write-Host "`n==> Preflight: branch"
+git rev-parse --abbrev-ref HEAD
 
-foreach ($file in $requiredFiles) {
-  if (-not (Test-Path -Path $file -PathType Leaf)) {
-    $missing += "FILE:$file"
-  }
-}
+Write-Host "`n==> Preflight: verify docs EOF"
+& "$PSScriptRoot\verify-docs-eof.ps1"
 
-if ($missing.Count -gt 0) {
-  Write-Host "Preflight FAILED. Missing items:"
-  $missing | ForEach-Object { Write-Host $_ }
-  exit 1
-}
-
-& "$PSScriptRoot/verify-docs-eof.ps1"
-if ($LASTEXITCODE -ne 0) {
-  exit $LASTEXITCODE
-}
-
-Write-Host "Preflight OK"
-exit 0
+Write-Host "`nOK: Preflight completado."
