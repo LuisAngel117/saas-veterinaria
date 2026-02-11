@@ -1,29 +1,47 @@
 # Entrega (checklist vendible)
 
-## Checklist demo local
-- [x] BRD con IDs `BRD-REQ-###` definido.
-- [x] RTM inicial req -> sprint master documentado.
-- [x] State snapshot actualizado.
-- [x] Masters BACK/FRONT en DRAFT con mapeo inicial.
-- [ ] Backend implementado para walking skeleton.
-- [ ] Frontend implementado para walking skeleton.
+## 1) Checklist demo local (2–3 min)
+- [ ] Login como RECEPCION (demo)
+- [ ] Selector sucursal
+- [ ] Crear cita (sala+vet, 30m, sin solape)
+- [ ] Check-in
+- [ ] Login como VETERINARIO
+- [ ] Iniciar atención (desde cita)
+- [ ] Completar SOAP mínimo
+- [ ] Agregar servicio (con BOM) → consumo inventario
+- [ ] Cerrar atención
+- [ ] Login como RECEPCION/ADMIN
+- [ ] Generar factura desde atención
+- [ ] Aplicar descuento (opcional)
+- [ ] Registrar pago parcial/mixto
+- [ ] Ver reporte “ventas por período” + export
 
-## Checklist seguridad
-- [x] Politica de auth/lockout/2FA documentada.
-- [x] Matriz de permisos por rol documentada.
-- [x] Acciones sensibles con reason required documentadas.
-- [x] Auditoria obligatoria documentada.
-- [ ] Validacion tecnica en runtime (pendiente implementacion).
+## 2) Checklist seguridad
+- [ ] Lockout funciona (4 intentos → 15 min)
+- [ ] Refresh rotación funciona
+- [ ] 2FA para ADMIN/SUPERADMIN funciona
+- [ ] Scoping: endpoint branch-scoped exige X-Branch-Id y valida contra JWT
+- [ ] Acciones sensibles exigen reason y quedan auditadas
 
-## Checklist RC
-- [x] `scripts/verify/verify-docs-eof.ps1` en verde.
-- [x] `scripts/verify/preflight.ps1` en verde.
-- [x] `docs/status/status.md` y `docs/log/log.md` actualizados.
-- [ ] Smoke E2E funcional (pendiente codigo).
+## 3) Checklist RC (local)
+- [ ] `scripts/verify/verify-docs-eof.ps1` OK
+- [ ] Backend: `./mvnw test` OK
+- [ ] Backend: `./mvnw spring-boot:run` OK
+- [ ] Frontend: `npm run build` OK
+- [ ] Frontend: `npm run dev` OK
+- [ ] Smoke scripts core OK
 
-## Que NO incluye (online-only)
-- Emision SRI en linea activa.
-- Integraciones externas obligatorias.
-- Observabilidad cloud completa.
+## 4) Qué NO incluye (v1)
+- [ ] E-factura SRI real (solo placeholder)
+- [ ] Recordatorios externos reales (solo cola “pendiente de enviar”)
+- [ ] Multi-tenant real
+- [ ] Auto-reserva por clientes
+- [ ] Inventario por lotes/caducidad
+- [ ] Horarios por sucursal
+
+## 5) Alineación con DoD (anti “piezas sueltas”)
+- [ ] Cada sprint entregó incremento integrado
+- [ ] RTM cubre BRD-REQ P0 con evidencia
+- [ ] LOG/STATUS completos y consistentes
 
 <!-- EOF -->

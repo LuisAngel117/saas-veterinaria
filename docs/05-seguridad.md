@@ -1,45 +1,79 @@
 # Seguridad
 
-## Auth flows
-- Login con usuario/password.
-- Access token JWT (duracion objetivo: 1h).
-- Refresh token (duracion objetivo: 7d) con rotacion.
-- Logout invalida refresh activo.
+## 1) Auth flows (v1)
+### Login
+- Input: username/email + password
+- Si credenciales válidas y usuario NO requiere 2FA:
+  - responde access JWT (1h) + refresh (7d)
+- Si requiere 2FA:
+  - estado intermedio (challenge) y se valida TOTP antes de emitir tokens
 
-## Password policy
-- Minimo 10 caracteres.
-- Debe incluir mayuscula, minuscula, numero y simbolo.
-- No se permite reutilizacion inmediata (detalle de historial: pendiente de implementacion).
+### Refresh
+- Input: refresh token
+- Output: nuevo access + nuevo refresh (rotación)
+- Invalida refresh anterior
 
-## 2FA TOTP
-- Requerido para `ADMIN` y `SUPERADMIN`.
-- Basado en RFC 6238.
-- Debe existir flujo de alta, verificacion y recuperacion controlada.
+### Logout
+- Invalida refresh token actual (server-side)
 
-## Roles vs permisos
-- Roles canonicos: `SUPERADMIN`, `ADMIN`, `RECEPCION`, `VETERINARIO`.
-- La autorizacion opera por permisos (no por nombre de pantalla).
-- UI debe reflejar permisos (ocultar/deshabilitar con explicacion).
+## 2) Password policy
+- Longitud mínima: 10
+- Reglas: mayúscula, minúscula, número, símbolo
+- Hash seguro (BCrypt/Argon2; decisión de implementación en sprint de seguridad)
 
-## Acciones sensibles (reason required)
-Incluye como minimo:
-- Anulacion/cambio de factura.
-- Cambio de precio.
-- Reapertura de HC cerrada.
-- Override de bloqueo por inventario.
-- Override de no-solape en agenda.
+## 3) Lockout
+- 4 intentos fallidos en ventana (definir ventana = 15 min)
+- bloquea login por 15 min
+- auditar lock/unlock
 
-## Auditoria
-- Obligatoria para auth, usuarios/roles, agenda, clientes/mascotas, HC, facturacion, inventario y configuracion sensible.
-- Debe registrar actor, timestamp, entidad, accion, reason y before/after cuando aplique.
-- Retencion demo: 90 dias.
+## 4) 2FA TOTP (ADMIN/SUPERADMIN)
+- Enrolar:
+  - generar secreto
+  - mostrar QR otpauth://
+  - validar primer código
+- Reset:
+  - requiere permiso admin/superadmin
+  - reason required
+  - auditar before/after (tenía 2FA, se reseteó)
 
-## Rate limit / lockout
-- Lockout: 4 intentos fallidos -> 15 minutos.
-- Rate limit detallado por endpoint: pendiente de parametrizacion en implementacion.
+## 5) Roles vs permisos (acción)
+- Roles: SUPERADMIN, ADMIN, RECEPCION, VETERINARIO
+- Permisos: códigos estables (ver `docs/10-permisos.md`)
+- Evaluación:
+  - backend: anotaciones/guards por permiso + branch-scoping
+  - frontend: ocultar/deshabilitar acciones sin permiso
 
-## CORS
-- Permitir origenes locales de frontend durante operacion local.
-- Denegar origenes no listados en configuracion.
+## 6) Acciones sensibles (reason required)
+Mínimo:
+- anular factura
+- cambiar precio
+- anular/borrar atención (preferir “anular”)
+- editar historia clínica cerrada
+- ajustes inventario manuales
+- override solape de cita
+- cambios configuración sensible (IVA default, feature flags)
+Regla:
+- reason obligatorio (string 10–500 chars)
+- auditar before/after cuando aplique
+
+## 7) Auditoría
+- Debe registrar:
+  - actor (userId)
+  - rol
+  - branchId (si aplica)
+  - acción (código estable)
+  - entidad afectada (tipo + id)
+  - timestamp
+  - reason (si aplica)
+  - before/after (JSON) en sensibles
+- Retención demo: 90 días (purga planificada)
+
+## 8) Rate limit / defensa básica
+- v1 local: enfoque en lockout por intentos fallidos.
+- Rate limit per endpoint: TBD (si se implementa → RFC/ADR + sprint de hardening).
+
+## 9) CORS
+- Local: permitir `http://localhost:<frontPort>` hacia backend.
+- Online/stage: restringir por dominio.
 
 <!-- EOF -->

@@ -1,33 +1,40 @@
-# UX/UI - Parte B
+# UX/UI — Parte B
 
-## Pantallas por rol
-- Comun: login, seleccion de sucursal, dashboard.
-- RECEPCION: agenda, clientes/mascotas, facturacion/pagos basicos.
-- VETERINARIO: agenda, atencion/HC, adjuntos.
-- ADMIN: configuracion operativa, reportes, auditoria (lectura).
-- SUPERADMIN: administracion global, IVA, permisos avanzados.
+## 1) Pantallas por rol (resumen)
+- RECEPCION:
+  - Agenda, Clientes/Mascotas (CRUD), Check-in, Facturación (crear/pagos), Reportes básicos
+- VETERINARIO:
+  - Agenda (ver), Atenciones (crear/editar/cerrar), SOAP, Adjuntos
+- ADMIN:
+  - Todo lo anterior + catálogos + usuarios + reaperturas + anulaciones + overrides
+- SUPERADMIN:
+  - Todo + IVA default + feature flags + políticas seguridad + auditoría completa
 
-## Tabla pantalla -> acciones -> permisos -> validaciones
-| Pantalla | Accion clave | Permiso sugerido | Validaciones |
+## 2) Tabla: pantalla → acciones → permisos → validaciones clave
+| Pantalla | Acción | Permiso | Validaciones |
 |---|---|---|---|
-| Login | Iniciar sesion | auth.login | lockout + 2FA segun rol |
-| Selector sucursal | Cambiar contexto | branch.select | sucursal habilitada para usuario |
-| Agenda semana | Crear/editar cita | agenda.manage | no-solape sala+vet, slot/buffer |
-| Agenda semana | Check-in | agenda.checkin | cita existente y estado valido |
-| Clientes | Crear/editar cliente | client.manage | datos minimos requeridos |
-| Mascotas | Crear/editar mascota | pet.manage | cliente asociado obligatorio |
-| Atencion/HC | Abrir/cerrar atencion | encounter.manage | estructura SOAP minima |
-| Atencion/HC | Reabrir HC cerrada | encounter.reopen | permiso + reason obligatorio |
-| Facturacion | Emitir/anular factura | billing.manage | items validos, auditoria |
-| Pagos | Registrar pago | payment.manage | monto > 0 y no exceder saldo |
-| Inventario | Ajustar stock | inventory.adjust | permiso + reason en ajustes sensibles |
-| Reportes | Exportar CSV/PDF | report.export | rango de fechas y branch scope |
+| Agenda | Crear cita | AGENDA_CREATE | no-solape sala+vet; X-Branch-Id; start<end |
+| Agenda | Forzar solape | AGENDA_OVERRIDE_OVERLAP | reason requerido; auditoría |
+| Agenda | Check-in | AGENDA_CHECKIN | estado permitido; auditar |
+| Atención | Crear sin cita | ENCOUNTER_CREATE | requiere client+pet+vet; scoping |
+| Atención | Cerrar | ENCOUNTER_CLOSE | SOAP mínimo completo; consumir BOM; auditar |
+| Atención | Reabrir | ENCOUNTER_REOPEN | reason; permiso; auditar before/after |
+| Factura | Crear | INVOICE_CREATE | encounter cerrada; calcular IVA/desc |
+| Factura | Pago parcial | PAYMENT_CREATE | monto >0; no exceder saldo |
+| Factura | Anular | INVOICE_ANNUL | reason; auditar before/after |
+| Inventario | Ajuste manual | INVENTORY_ADJUST | reason; auditar before/after |
+| Inventario | Override stock | INVENTORY_OVERRIDE_NEGATIVE | reason; auditar |
+| Admin | Cambiar IVA | SETTINGS_TAX_UPDATE | SUPERADMIN; reason; auditar |
 
-## Reglas visuales
-- UI en Espanol y orientada a demo rapida.
-- Mostrar contexto activo de sucursal en header.
-- Acciones sin permiso deben mostrarse deshabilitadas con mensaje explicativo.
-- Errores de API se renderizan con mensaje comprensible sin ocultar codigo/causa.
-- Formularios sensibles exigen confirmacion explicita y captura de reason.
+## 3) Reglas visuales
+- UI en español.
+- Componentes consistentes (shadcn):
+  - tablas con filtros
+  - formularios con validación
+  - modales para “reason required”
+- Mensajes:
+  - usar “No autorizado” (403), “Falta contexto de sucursal” (400), “Conflicto de agenda” (409).
+- Estados:
+  - siempre mostrar estado actual y “siguiente paso sugerido”.
 
 <!-- EOF -->

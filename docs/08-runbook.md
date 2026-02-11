@@ -1,29 +1,72 @@
-# Runbook (operacion local)
+# Runbook (operación local)
 
-## Prerequisitos
-- Git.
-- PowerShell 7+.
-- Stack objetivo para implementacion: Java 21, Node.js LTS, Postgres 17.
+Este runbook define el objetivo operativo. Algunos comandos/scripts serán implementados en sprints; mientras tanto se mantiene como contrato.
 
-## DB local (Postgres 17)
-Estado actual: pendiente de scripts operativos en repo.
-- Regla: cuando se agreguen scripts reales, este documento y `docs/state/state.md` deben actualizarse en la misma tanda.
+## 1) Prerequisitos
+- Git
+- Java 21 (Temurin recomendado)
+- Node.js LTS (20+ recomendado)
+- Postgres 17 (instalable local)
+- PowerShell 7 (recomendado en Windows; en Linux usar pwsh)
+- (Opcional) Docker (NO en v1 inicial)
 
-## Levantar backend
-Estado actual: pendiente de implementacion de backend.
-- No existen comandos canonicos en este repo aun.
+## 2) Variables de entorno (objetivo)
+Backend (ejemplo, se definirá en implementación):
+- `SPRING_PROFILES_ACTIVE=local`
+- `DB_HOST=localhost`
+- `DB_PORT=5432`
+- `DB_NAME=saas_veterinaria`
+- `DB_USER=...`
+- `DB_PASSWORD=...`
+- `JWT_SECRET=...`
+- `ATTACHMENTS_DIR=./.data/attachments`
+Frontend:
+- `NEXT_PUBLIC_API_BASE_URL=http://localhost:8080`
 
-## Levantar frontend
-Estado actual: pendiente de implementacion de frontend.
-- No existen comandos canonicos en este repo aun.
+## 3) Crear DB local (Postgres 17)
+Objetivo:
+- Base de datos `saas_veterinaria`
+- Usuario con permisos
 
-## Troubleshooting
-- Si falla EOF: ejecutar `powershell -ExecutionPolicy Bypass -File scripts/verify/verify-docs-eof.ps1`.
-- Si hay dudas de entorno/repositorio: ejecutar `powershell -ExecutionPolicy Bypass -File scripts/verify/preflight.ps1`.
-- Si `git status --porcelain` no esta limpio, detener tanda y resolver antes de continuar.
+Ejemplo (manual):
+- Crear usuario y DB desde psql/pgAdmin.
 
-## Scripts "verdad"
-- `scripts/verify/verify-docs-eof.ps1`
-- `scripts/verify/preflight.ps1`
+## 4) Migraciones
+- Flyway migrará automáticamente al levantar backend (según configuración futura).
+- Comando “verdad” esperado (cuando exista):
+  - `./mvnw test`
+  - `./mvnw spring-boot:run`
+
+## 5) Levantar backend (objetivo)
+- Puerto objetivo: 8080
+- Endpoints esperados:
+  - `/actuator/health`
+  - `/api/v1/auth/login`
+  - `/api/v1/me`
+
+## 6) Levantar frontend (objetivo)
+- Puerto objetivo: 3000
+- Comandos “verdad” esperados:
+  - `npm ci`
+  - `npm run build`
+  - `npm run dev`
+
+## 7) Smoke tests (objetivo)
+Se implementarán scripts en `scripts/smoke/`:
+- `smoke-auth.ps1`: health + login + me
+- `smoke-scoping.ps1`: endpoints branch-scoped exigen X-Branch-Id
+- `smoke-core-flow.ps1`: cita → atención → factura → pago → reporte
+
+## 8) Troubleshooting típico
+- Error conexión DB: revisar credenciales/puerto.
+- Error CORS: verificar `NEXT_PUBLIC_API_BASE_URL`.
+- Error “missing X-Branch-Id”: asegúrate de enviar header en requests branch-scoped.
+- Error “overlap conflict”: revisar sala/vet y slot.
+
+## 9) Scripts “verdad” (actuales)
+- Verificador docs EOF:
+  - `pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1`
+- Preflight:
+  - `pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1`
 
 <!-- EOF -->

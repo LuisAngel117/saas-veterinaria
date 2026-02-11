@@ -1,70 +1,124 @@
 # Permisos (matriz estable)
 
-## Roles
-- `SUPERADMIN`: gobierno global, configuracion sensible, auditoria total.
-- `ADMIN`: operacion administrativa por sucursal.
-- `RECEPCION`: agenda, clientes, facturacion/pagos operativos.
-- `VETERINARIO`: atencion clinica y agenda propia.
+## 1) Roles (v1)
+- SUPERADMIN
+- ADMIN
+- RECEPCION
+- VETERINARIO
 
-## Permisos (codigos) por modulo
-| Modulo | Permisos |
-|---|---|
-| Auth | `auth.login`, `auth.refresh`, `auth.logout`, `auth.2fa.manage` |
-| Branch | `branch.select` |
-| Agenda | `agenda.view`, `agenda.manage`, `agenda.checkin`, `agenda.override_overlap` |
-| Clientes/Mascotas | `client.view`, `client.manage`, `pet.view`, `pet.manage` |
-| Atencion/HC | `encounter.view`, `encounter.manage`, `encounter.close`, `encounter.reopen`, `encounter.attach` |
-| Servicios | `service.view`, `service.manage` |
-| Inventario | `inventory.view`, `inventory.adjust`, `inventory.override_block` |
-| Facturacion/Pagos | `billing.view`, `billing.manage`, `billing.void`, `payment.manage` |
-| Reportes | `report.view`, `report.export` |
-| Configuracion | `config.iva.update`, `config.security.update` |
-| Auditoria | `audit.view` |
+## 2) Permisos (códigos) por módulo
 
-## Matriz rol -> permisos
+### Auth / sesión
+- AUTH_LOGIN
+- AUTH_REFRESH
+- AUTH_LOGOUT
+- AUTH_2FA_ENROLL
+- AUTH_2FA_RESET
+
+### Branch (scoping)
+- BRANCH_SELECT
+- BRANCH_VIEW
+
+### Agenda
+- AGENDA_VIEW
+- AGENDA_CREATE
+- AGENDA_EDIT
+- AGENDA_CONFIRM
+- AGENDA_CANCEL
+- AGENDA_CHECKIN
+- AGENDA_START_SERVICE
+- AGENDA_CLOSE
+- AGENDA_OVERRIDE_OVERLAP (reason required)
+
+### Clientes / Mascotas
+- CLIENT_VIEW
+- CLIENT_CREATE
+- CLIENT_EDIT
+- PET_VIEW
+- PET_CREATE
+- PET_EDIT
+
+### Clínica / Atenciones / SOAP / Adjuntos
+- ENCOUNTER_VIEW
+- ENCOUNTER_CREATE
+- ENCOUNTER_EDIT
+- ENCOUNTER_CLOSE
+- ENCOUNTER_REOPEN (reason required)
+- ENCOUNTER_EDIT_CLOSED (reason required)
+- ATTACHMENT_UPLOAD
+- ATTACHMENT_VIEW
+
+### Catálogo servicios
+- SERVICE_VIEW
+- SERVICE_CREATE
+- SERVICE_EDIT
+- SERVICE_BOM_EDIT
+
+### Inventario
+- INVENTORY_VIEW
+- INVENTORY_PRODUCT_CREATE
+- INVENTORY_PRODUCT_EDIT
+- INVENTORY_MOVEMENT_IN
+- INVENTORY_MOVEMENT_OUT
+- INVENTORY_ADJUST (reason required)
+- INVENTORY_OVERRIDE_NEGATIVE (reason required)
+
+### Facturación
+- INVOICE_VIEW
+- INVOICE_CREATE
+- INVOICE_EDIT
+- INVOICE_PRICE_OVERRIDE (reason required)
+- PAYMENT_CREATE
+- INVOICE_ANNUL (reason required)
+
+### Reportes
+- REPORT_VIEW
+- REPORT_EXPORT
+
+### Admin / Seguridad
+- USER_VIEW
+- USER_CREATE
+- USER_EDIT
+- ROLE_ASSIGN
+- SETTINGS_TAX_UPDATE (SUPERADMIN, reason required)
+- FEATURE_FLAG_UPDATE (SUPERADMIN, reason required)
+- AUDIT_VIEW
+
+## 3) Matriz rol → permisos (v1)
 | Permiso | SUPERADMIN | ADMIN | RECEPCION | VETERINARIO |
-|---|---|---|---|---|
-| auth.login / auth.refresh / auth.logout | SI | SI | SI | SI |
-| auth.2fa.manage | SI | SI | NO | NO |
-| branch.select | SI | SI | SI | SI |
-| agenda.view | SI | SI | SI | SI |
-| agenda.manage | SI | SI | SI | SI |
-| agenda.checkin | SI | SI | SI | SI |
-| agenda.override_overlap | SI | SI | NO | NO |
-| client.view / pet.view | SI | SI | SI | SI |
-| client.manage / pet.manage | SI | SI | SI | NO |
-| encounter.view | SI | SI | SI | SI |
-| encounter.manage / encounter.attach | SI | SI | NO | SI |
-| encounter.close | SI | SI | NO | SI |
-| encounter.reopen | SI | SI | NO | NO |
-| service.view | SI | SI | SI | SI |
-| service.manage | SI | SI | NO | NO |
-| inventory.view | SI | SI | SI | SI |
-| inventory.adjust | SI | SI | NO | NO |
-| inventory.override_block | SI | SI | NO | NO |
-| billing.view | SI | SI | SI | SI |
-| billing.manage | SI | SI | SI | NO |
-| billing.void | SI | SI | NO | NO |
-| payment.manage | SI | SI | SI | NO |
-| report.view / report.export | SI | SI | SI | SI |
-| config.iva.update / config.security.update | SI | NO | NO | NO |
-| audit.view | SI | SI | NO | NO |
+|---|:---:|:---:|:---:|:---:|
+| AGENDA_VIEW | ✅ | ✅ | ✅ | ✅ |
+| AGENDA_CREATE/EDIT/CONFIRM/CANCEL | ✅ | ✅ | ✅ | ❌ |
+| AGENDA_CHECKIN | ✅ | ✅ | ✅ | ❌ |
+| AGENDA_START_SERVICE / CLOSE | ✅ | ✅ | ❌ | ✅ |
+| AGENDA_OVERRIDE_OVERLAP | ✅ | ✅ | ❌ | ❌ |
+| CLIENT_* / PET_* (view/create/edit) | ✅ | ✅ | ✅ | ✅ (solo view/edit según política futura; v1: ✅ view, ✅ edit limitado) |
+| ENCOUNTER_CREATE/EDIT/CLOSE | ✅ | ✅ | ❌ | ✅ |
+| ENCOUNTER_REOPEN / EDIT_CLOSED | ✅ | ✅ | ❌ | (✅ solo si se asigna explícito) |
+| ATTACHMENT_* | ✅ | ✅ | ❌ | ✅ |
+| SERVICE_* | ✅ | ✅ | ❌ | ❌ |
+| INVENTORY_* | ✅ | ✅ | ❌ | ❌ |
+| INVOICE_CREATE / PAYMENT_CREATE | ✅ | ✅ | ✅ | ❌ |
+| INVOICE_ANNUL / PRICE_OVERRIDE | ✅ | ✅ | ❌ | ❌ |
+| REPORT_VIEW/EXPORT | ✅ | ✅ | ✅ (básico) | ✅ (clínico básico) |
+| USER_* / ROLE_ASSIGN | ✅ | ✅ | ❌ | ❌ |
+| SETTINGS_TAX_UPDATE / FEATURE_FLAG_UPDATE | ✅ | ❌ | ❌ | ❌ |
+| AUDIT_VIEW | ✅ | ✅ | ❌ | ❌ |
 
-## Acciones sensibles: reason required
-- `agenda.override_overlap`
-- `encounter.reopen`
-- `billing.void`
-- `inventory.override_block`
-- `config.iva.update`
-- Ajustes manuales de inventario y cambios de precio
+Nota: ajustes finos por rol pueden requerir RFC si cambian flujos core.
 
-## Auditoria obligatoria
-Toda accion sensible y todo cambio de permisos/roles/configuracion debe registrar:
-- actor
-- fecha/hora
-- sucursal contexto
-- entidad/accion
-- reason
-- before/after cuando aplique
+## 4) Acciones sensibles: reason required
+- AGENDA_OVERRIDE_OVERLAP
+- ENCOUNTER_REOPEN
+- ENCOUNTER_EDIT_CLOSED
+- INVENTORY_ADJUST
+- INVENTORY_OVERRIDE_NEGATIVE
+- INVOICE_PRICE_OVERRIDE
+- INVOICE_ANNUL
+- SETTINGS_TAX_UPDATE
+- FEATURE_FLAG_UPDATE
+
+## 5) Auditoría obligatoria
+Toda acción sensible debe escribir audit_event con before/after y reason.
 
 <!-- EOF -->
