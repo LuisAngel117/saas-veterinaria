@@ -1,7 +1,7 @@
 # State Snapshot
 
 ## 1) Resumen actual
-Proyecto nuevo “SaaSVeterinaria” (repo: saas-veterinaria). La documentación contractual ya define: alcance v1, decisiones clave (ADRs), quality gates (DoR/DoD), BRD con IDs estables, RTM inicial, master BACK en estado ACCEPTED, y master FRONT en DRAFT para aceptación.
+Proyecto nuevo “SaaSVeterinaria” (repo: saas-veterinaria). La documentación contractual ya define: alcance v1, decisiones clave (ADRs), quality gates (DoR/DoD), BRD con IDs estables, RTM inicial, master BACK en estado ACCEPTED, y master FRONT en DRAFT para aceptación. Los sprints detallados BACK/FRONT ya están documentados; los FRONT permanecen bloqueados para ejecución mientras el master FRONT siga en DRAFT.
 
 ## 2) Decisiones cerradas (ADRs)
 - Stack: `docs/decisions/adr-0001-stack.md`
@@ -22,6 +22,7 @@ Referencia: `docs/status/status.md`
 - T1/T2/T3: documentación base + gobernanza (READY_FOR_VALIDATION según evidencia).
 - T4: BRD-REQ + RTM + masters (READY_FOR_VALIDATION después del commit T4).
 - T5: normalizaciones contractuales (estados + project-lock) + aceptación del master BACK.
+- Catálogo/plantillas de sprints: BACK y FRONT documentados en `docs/sprints/` (ver filas `SPR-*` en `docs/status/status.md`).
 - Masters:
   - `docs/sprints/spr-master-back.md` = ACCEPTED
   - `docs/sprints/spr-master-front.md` = DRAFT
@@ -32,12 +33,11 @@ Referencia: `docs/status/status.md`
 1) Usuario revisa master FRONT.
 2) Usuario responde exactamente:
    - “Acepto el plan maestro FRONT tal cual”
-3) Luego se generan sprints detallados:
-   - BACK: SPR-B001 (Walking Skeleton)
-   - FRONT: SPR-F001 (setup shell + auth bootstrap)
+3) Luego se habilita la ejecución de sprints FRONT ya redactados (iniciando por `SPR-F001`).
+4) BACK puede iniciar ejecución por `SPR-B001` según prioridad definida por usuario.
 
 ## 6) Riesgos/bloqueos actuales
-- Si no se acepta master FRONT, no se deben generar sprints FRONT detallados.
+- Si no se acepta master FRONT, no se deben ejecutar sprints FRONT (aunque estén documentados).
 - Cualquier cambio a scoping/agenda/seguridad exige RFC/ADR.
 
 <!-- EOF -->

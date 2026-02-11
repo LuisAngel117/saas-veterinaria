@@ -1,9 +1,12 @@
-# Project Lock
+# Project Lock (LEGACY - NO CANONICO)
 
-- repo: saas-veterinaria
-- branch-lock: main
-- remote-lock: https://github.com/LuisAngel117/saas-veterinaria.git
-- owner-lock: LuisAngel117
-- mode: placeholders
+Este archivo se mantiene solo por compatibilidad historica.
+
+Fuente de verdad unica:
+- `docs/project-lock.md`
+
+Regla:
+- No usar `docs/state/project-lock.md` para validaciones de repo/branch/remote.
+- Usar siempre `docs/project-lock.md`.
 
 <!-- EOF -->

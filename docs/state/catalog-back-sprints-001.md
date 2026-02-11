@@ -35,28 +35,27 @@ Fuente de verdad auditada: `docs/sprints/spr-master-back.md` (ACCEPTED, 2026-02-
 | ID del master | Existe fila en `docs/status/status.md` | Nota |
 |---|---|---|
 | SPR-B001 | Si | Fila encontrada |
-| SPR-B002 | No | No existe fila en status |
-| SPR-B003 | No | No existe fila en status |
-| SPR-B004 | No | No existe fila en status |
-| SPR-B005 | No | No existe fila en status |
-| SPR-B006 | No | No existe fila en status |
-| SPR-B007 | No | No existe fila en status |
-| SPR-B008 | No | No existe fila en status |
-| SPR-B009 | No | No existe fila en status |
-| SPR-B010 | No | No existe fila en status |
-| SPR-B011 | No | No existe fila en status |
-| SPR-B012 | No | No existe fila en status |
-| SPR-B013 | No | No existe fila en status |
-| SPR-B014 | No | No existe fila en status |
-| SPR-B015 | No | No existe fila en status |
-| SPR-B016 | No | No existe fila en status |
-| SPR-B017 | No | No existe fila en status |
-| SPR-B018 | No | No existe fila en status |
-| SPR-B019 | No | No existe fila en status |
-| SPR-RC001 | No | No existe fila en status |
+| SPR-B002 | Si | Fila encontrada |
+| SPR-B003 | Si | Fila encontrada |
+| SPR-B004 | Si | Fila encontrada |
+| SPR-B005 | Si | Fila encontrada |
+| SPR-B006 | Si | Fila encontrada |
+| SPR-B007 | Si | Fila encontrada |
+| SPR-B008 | Si | Fila encontrada |
+| SPR-B009 | Si | Fila encontrada |
+| SPR-B010 | Si | Fila encontrada |
+| SPR-B011 | Si | Fila encontrada |
+| SPR-B012 | Si | Fila encontrada |
+| SPR-B013 | Si | Fila encontrada |
+| SPR-B014 | Si | Fila encontrada |
+| SPR-B015 | Si | Fila encontrada |
+| SPR-B016 | Si | Fila encontrada |
+| SPR-B017 | Si | Fila encontrada |
+| SPR-B018 | Si | Fila encontrada |
+| SPR-B019 | Si | Fila encontrada |
+| SPR-RC001 | Si | Fila encontrada |
 
 ## D) Recomendacion: siguiente sprint a redactar
-- Primer sprint del master cuyo `.md` no existe en `docs/sprints/`: `SPR-B007`.
-- Ruta esperada para redaccion: `docs/sprints/spr-b007.md` (o variante en mayusculas `docs/sprints/SPR-B007.md`).
+- No aplica: todos los sprints del master BACK ya tienen archivo `.md` en `docs/sprints/`.
 
 <!-- EOF -->
