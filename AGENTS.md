@@ -1,13 +1,13 @@
-# AGENTS — Reglas de conducta para agentes (Codex)
+# AGENTS - Reglas de conducta para agentes (Codex)
 
 ## Fuente de verdad
-- Identidad del proyecto: `docs/project-lock.md`
-- Orden de lectura: `docs/00-indice.md`
-- Estado actual: `docs/state/state.md`
-- Gobernanza: sprints bloqueados; cambios solo por RFC/ADR/CHANGELOG.
+- Identidad del proyecto: `project-lock.md`.
+- Orden de lectura: `docs/00-indice.md`.
+- Estado actual: `docs/state/state.md`.
+- Gobernanza: cambios de contrato por RFC/ADR + changelog.
 
-## Orden mínimo de lectura antes de actuar
-1) `docs/project-lock.md`
+## Orden minimo de lectura antes de actuar
+1) `project-lock.md`
 2) `docs/00-indice.md`
 3) `docs/state/state.md`
 4) Sprint actual (si aplica) en `docs/sprints/`
@@ -16,16 +16,17 @@
 7) `docs/traceability/rtm.md`
 
 ## Reglas duras
-- NO inventar requisitos, endpoints, scripts, rutas, usuarios git, ni datos faltantes.
-- NO editar sprints bloqueados. Si algo debe cambiar: RFC/ADR + CHANGELOG.
+- NO inventar requisitos, endpoints, scripts, rutas, usuarios git ni datos faltantes.
+- NO editar sprints bloqueados; si algo cambia, abrir RFC/ADR y actualizar changelog.
 - NO tocar archivos fuera del scope del prompt.
-- Nunca marcar DONE/APROBADO (eso lo hace el usuario tras validación local con evidencia en LOG).
-- Siempre mantener el repo compilable/ejecutable.
-- Linux-strict: nombres minúsculos, sin espacios, case consistente.
+- Nunca marcar DONE/APROBADO (lo marca el usuario tras validacion local).
+- Mantener repo en estado verificable.
+- Linux-strict: nombres en minusculas y case consistente.
+- Agenda: check-in es evento separado; no inventar estados extra de cita.
 
 ## Evidencia
-- `docs/log/log.md` es append-only (nunca reescribir).
+- `docs/log/log.md` es append-only (nunca reescribir entradas previas).
 - `docs/status/status.md` es la tabla de control.
-- Todo doc bajo `docs/**` debe terminar con `<!-- EOF -->` (verificador en scripts/verify).
+- Todo doc bajo `docs/**` termina con `<!-- EOF -->`.
 
 <!-- EOF -->

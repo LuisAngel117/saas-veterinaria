@@ -3,12 +3,13 @@
 ## 1) Estados y transiciones (alto nivel)
 
 ### appointment.status
-- RESERVED → CONFIRMED → CHECKED_IN → IN_SERVICE → CLOSED
-- CANCELLED puede ocurrir desde RESERVED/CONFIRMED/CHECKED_IN (según política)
+- RESERVED → CONFIRMED → IN_ATTENTION → CLOSED
+- CANCELLED puede ocurrir desde RESERVED/CONFIRMED (segun politica)
 - Reglas:
-  - CHECKED_IN requiere recepción
-  - IN_SERVICE inicia veterinario
-  - CLOSED cierra flujo clínico
+  - check-in requiere recepcion y registra `check_in_at` + `checked_in_by_user_id`
+  - check-in NO cambia `appointment.status`
+  - IN_ATTENTION inicia veterinario y representa inicio de atencion
+  - CLOSED cierra flujo clinico
 
 ### encounter.status (atención)
 - DRAFT → OPEN → CLOSED
@@ -228,7 +229,7 @@
 
 ## 4) Eventos auditables (mínimo)
 - auth: login/logout/refresh/lockout
-- agenda: create/update/cancel/check-in/start/close/override solape
+- agenda: create/update/confirm/cancel/check-in/start-attention/close-attention/override solape
 - clinic: create/update/close/reopen
 - billing: create/update/pay/annul/price override/IVA change
 - inventory: IN/OUT/ADJUST/CONSUME/override stock

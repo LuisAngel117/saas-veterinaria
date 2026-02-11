@@ -116,9 +116,11 @@
 | vet_user_id | UUID | requerido (user) |
 | client_id | UUID | requerido |
 | pet_id | UUID | requerido |
-| status | text | requerido (RESERVED/CONFIRMED/CHECKED_IN/IN_SERVICE/CLOSED/CANCELLED) |
+| status | text | requerido (RESERVED/CONFIRMED/IN_ATTENTION/CLOSED/CANCELLED) |
 | start_at | timestamp | requerido |
 | end_at | timestamp | requerido |
+| check_in_at | timestamp | opcional (evento check-in, no cambia status) |
+| checked_in_by_user_id | UUID | opcional (usuario que realizo check-in) |
 | buffer_minutes | int | default 10 |
 | override_overlap | boolean | default false |
 | override_reason | text | requerido si override_overlap=true |
@@ -128,6 +130,7 @@
 
 Notas:
 - `status` en DB puede usar códigos internos; UI mostrará español.
+- `check-in` es evento operativo separado; no agrega estados adicionales a la cita.
 - Se recomienda index: (branch_id, room_id, start_at), (branch_id, vet_user_id, start_at).
 
 ## 2) Relaciones

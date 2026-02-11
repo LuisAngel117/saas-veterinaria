@@ -1,19 +1,23 @@
-# ADR-0005 — Auditoría
+# ADR-0005 - Auditoria
+
+## Estado
+ACCEPTED
 
 ## Contexto
-Se requiere trazabilidad “quién cambió qué y cuándo”, con before/after en acciones sensibles.
+Se necesita trazabilidad de acciones sensibles con contexto suficiente para revisiones funcionales y tecnicas.
 
-## Decisión
-- Auditoría obligatoria en auth, usuarios/roles, agenda, clientes/mascotas, HC, facturación, inventario, config sensible.
-- Acciones sensibles requieren reason y registran before/after.
-- Retención demo: 90 días (purga configurable a futuro).
+## Decision
+- Auditoria obligatoria en auth, agenda, clientes/mascotas, HC, inventario, facturacion, configuracion y seguridad.
+- Acciones sensibles exigen `reason` y, cuando aplique, `before/after`.
+- Retencion demo: 90 dias.
 
 ## Consecuencias
-- Los sprints deben incluir evidencia de auditoría en LOG y criterios DoD.
-- El modelo de auditoría debe ser consistente y consultable.
+- Las tandas deben registrar evidencia en log/status.
+- El modelo de auditoria debe ser consultable y consistente entre modulos.
 
 ## Alternativas descartadas
-TBD
+- Auditoria parcial solo de auth/facturacion: descartada por cobertura insuficiente.
+- Logs sin estructura de evento: descartados por baja trazabilidad.
 
 ## Fecha
 2026-02-11

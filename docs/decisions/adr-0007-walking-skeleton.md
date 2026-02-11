@@ -1,21 +1,24 @@
-# ADR-0007 — Walking Skeleton
+# ADR-0007 - Walking Skeleton
+
+## Estado
+ACCEPTED
 
 ## Contexto
-Evitar construir por capas sin integración.
+Se requiere validar integracion real temprano para reducir riesgo de sprints desconectados.
 
-## Decisión
-Incluir temprano un “walking skeleton” end-to-end:
-- Auth + selección de sucursal
-- 1 caso core (crear cita) con persistencia
-- Runbook + smoke scripts
-- Evidencia en LOG/STATUS
+## Decision
+Implementar temprano un walking skeleton end-to-end:
+- Auth + seleccion de sucursal.
+- Crear cita (agenda) respetando scoping.
+- Evidencia documental con status/log/RTM.
+- Verificacion con scripts canonicos.
 
 ## Consecuencias
-- Los masters BACK/FRONT deben priorizar este bloque.
-- Sprints deben ser vertical slice cuando aplique.
+- Masters BACK/FRONT deben priorizar este corte vertical.
+- No se habilitan sprints de expansion sin cerrar primero este recorrido.
 
 ## Alternativas descartadas
-TBD
+- Construccion por capas sin flujo integrado: descartada por riesgo de piezas sueltas.
 
 ## Fecha
 2026-02-11

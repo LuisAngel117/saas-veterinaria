@@ -1,19 +1,24 @@
-# ADR-0002 — Arquitectura
+# ADR-0002 - Arquitectura
+
+## Estado
+ACCEPTED
 
 ## Contexto
-Necesitamos evitar “piezas sueltas” y mantener trazabilidad.
+El proyecto necesita entregas incrementales sin piezas sueltas y con trazabilidad entre requerimiento, codigo y evidencia.
 
-## Decisión
-- Monolito modular (backend) con capas claras (web/api, aplicación, dominio, infraestructura).
-- Contratos de API consistentes + errores Problem Details.
-- Gobernanza: sprints bloqueados; cambios por RFC/ADR/CHANGELOG.
+## Decision
+- Backend en monolito modular por capas (`web/api`, `application`, `domain`, `infrastructure`).
+- Frontend desacoplado por modulos funcionales sobre contratos API estables.
+- Errores API bajo Problem Details (RFC 7807).
+- Gobernanza obligatoria: DoR/DoD + RTM + status/log + ADR/RFC/changelog.
 
 ## Consecuencias
-- El diseño de sprints debe ser vertical slice cuando aplique.
-- Se requiere RTM y state snapshot actualizados.
+- Cambios de contrato deben pasar por RFC/ADR antes de ejecucion.
+- Cada sprint debe cerrar evidencia documental junto con el incremento tecnico.
 
 ## Alternativas descartadas
-TBD
+- Microservicios tempranos: descartados por complejidad innecesaria en fase actual.
+- Documentacion no versionada: descartada por riesgo de divergencia.
 
 ## Fecha
 2026-02-11

@@ -41,4 +41,23 @@ Formato por entrada:
 - Resultado:
   - READY_FOR_VALIDATION (al finalizar la aplicación y pasar scripts)
 
+## 2026-02-11T08:01:29-05:00 (America/Guayaquil)
+- Sprint/Tanda: T3
+- Que cambio:
+  - Gobernanza: indice, DoR/DoD, ADRs, RFC template, AGENTS, project-lock.
+  - Coherencia agenda: check-in separado; sin estados extra de cita.
+  - Actualizacion de changelog y status.
+- Comandos ejecutados:
+  - git status --porcelain
+  - git config user.name; git config user.email
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - powershell -ExecutionPolicy Bypass -File scripts/verify/verify-docs-eof.ps1
+  - powershell -ExecutionPolicy Bypass -File scripts/verify/preflight.ps1
+  - git rev-parse HEAD
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - IN_PROGRESS (se marcara READY_FOR_VALIDATION al cerrar commit T3)
+
 <!-- EOF -->
