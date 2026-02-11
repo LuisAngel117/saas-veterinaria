@@ -1,18 +1,33 @@
 # Definition of Done (DoD)
 
-Un sprint/tanda NO puede quedar `READY_FOR_VALIDATION` si no cumple DoD.
+Propósito: evitar “terminados” sin incremento usable e integrado.
 
-## Checklist DoD (verificable)
-- [ ] Todos los AC comprometidos estan cumplidos.
-- [ ] Incremento integrado (sin piezas sueltas).
-- [ ] `docs/status/status.md` actualizado a `READY_FOR_VALIDATION` (nunca DONE).
-- [ ] `docs/log/log.md` actualizado en modo append-only con comandos y resultado.
-- [ ] Si hubo cambios en `BRD-REQ-###`, se actualizo `docs/traceability/rtm.md`.
-- [ ] Si hubo cambios de alcance/contrato/arquitectura, se actualizo ADR/RFC/changelog.
-- [ ] `docs/state/state.md` actualizado cuando aplique snapshot de continuidad.
-- [ ] Coherencia agenda preservada (check-in separado, sin nuevos estados no aprobados).
-- [ ] `scripts/verify/verify-docs-eof.ps1` pasa.
-- [ ] `scripts/verify/preflight.ps1` pasa.
-- [ ] `git status --porcelain` limpio al cerrar.
+## Checklist DoD (obligatorio)
+### Calidad e integración
+- [ ] Incremento funcional e integrado (no pieza suelta).
+- [ ] Repo compila/build (según aplique).
+- [ ] Comandos “verdad” ejecutados o N/A con razón.
+
+### Criterios y pruebas
+- [ ] AC completos (verificables).
+- [ ] Smoke/manual ejecutado y registrado en LOG (output pegado o placeholder).
+
+### Trazabilidad y documentación
+- [ ] `docs/log/log.md` actualizado (append-only) con comandos y resultado.
+- [ ] `docs/status/status.md` actualizado con READY_FOR_VALIDATION + hash commit.
+- [ ] Si toca/cierra BRD-REQ: `docs/traceability/rtm.md` actualizado.
+- [ ] `docs/state/state.md` actualizado con snapshot y “next sprint”.
+
+### Seguridad/auditoría (si aplica)
+- [ ] Acciones sensibles exigen reason.
+- [ ] Auditoría before/after implementada donde corresponde.
+
+## “Vendible local” mínimo
+- [ ] El flujo demo se acerca más a lo descrito en `docs/11-entrega.md`.
+- [ ] No introduce dependencias externas en core (offline-first se mantiene).
+
+## Regla de estado
+- Codex solo puede dejar **READY_FOR_VALIDATION**.
+- **DONE** solo lo marca el usuario tras validar localmente.
 
 <!-- EOF -->

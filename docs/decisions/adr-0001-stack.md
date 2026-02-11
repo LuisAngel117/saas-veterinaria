@@ -1,26 +1,25 @@
-# ADR-0001 - Stack
-
-## Estado
-ACCEPTED
+# ADR-0001 — Stack técnico
 
 ## Contexto
-Se requiere stack local-first, reproducible y mantenible para una demo vendible sin dependencias externas obligatorias.
+Necesitamos un stack empleable, estable y compatible con local-first/offline-first real, con demo reproducible y tooling estándar.
 
-## Decision
-- Backend: Java 21 + Spring Boot.
-- DB: Postgres 17.
-- Migraciones: Flyway.
-- API docs: OpenAPI/Swagger.
-- Frontend: Next.js (TypeScript) + Tailwind + shadcn/ui.
-- Scripts operativos/verificacion: PowerShell (`.ps1`).
+## Decisión
+- Backend: Java 21 + Spring Boot + Spring Security + Spring Data JPA
+- DB: Postgres 17
+- Migraciones: Flyway (mínimo versión compatible con Postgres 17; objetivo Flyway 10.20.0+)
+- API docs: OpenAPI/Swagger
+- Frontend: Next.js (TypeScript) + Tailwind + shadcn/ui + TanStack Query + React Hook Form + Zod
+- Monorepo (backend + frontend)
+- Scripts “verdad” principales en PowerShell (.ps1)
+- Errores API: Problem Details (RFC 7807)
 
 ## Consecuencias
-- El runbook debe cubrir Windows y Linux.
-- Versiones de tooling deben mantenerse compatibles en cada tanda.
+- Requiere disciplina de módulos y convenciones.
+- Flyway debe fijarse en versión compatible (evitar “unsupported database”).
 
 ## Alternativas descartadas
-- Node.js backend completo: descartado por preferencia de stack Java en dominio empresarial.
-- MySQL: descartado por estandarizacion actual en Postgres.
+- Multi-tenant v1 (descartado por alcance).
+- Docker obligatorio desde el inicio (pospuesto).
 
 ## Fecha
 2026-02-11

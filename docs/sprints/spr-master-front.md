@@ -1,49 +1,80 @@
-# Sprint Master — FRONT (DRAFT)
+# SPR-MASTER — FRONTEND (DRAFT)
 
-Estado: DRAFT (no aceptar aún). Se congela tras revisión final de mapeo BRD-REQ y handoff backend.
+**Estado:** DRAFT (no ejecutar sprints hasta aceptación explícita del usuario)  
+**Regla:** una vez aceptado (“Acepto el plan maestro FRONT tal cual”), queda congelado; cambios solo por RFC/ADR/CHANGELOG.
 
-## Objetivo
-Construir frontend vendible con integración real contra backend, priorizando el flujo demo end-to-end.
+## 1) Objetivo del plan
+Cerrar P0 del BRD con flujos integrados reales contra backend (sin pantallas sueltas), UX en español y lista para demo.
 
-## Dependencia obligatoria
-- Antes de integración real, el FRONT debe basarse en:
-  - `docs/handoff/handoff-back-to-front.md` (endpoints reales)
+## 2) Sprints frontend (propuestos)
 
-## Sprints propuestos (orden recomendado)
+### SPR-F001 — Shell vendible (auth + selector branch + guards + API client)
+- Cierra: BRD-REQ-001, BRD-REQ-002, BRD-REQ-022, BRD-REQ-025
+- Entrega: login, manejo refresh, selector sucursal post-login, layout, navegación base, manejo errores Problem Details.
+- Dependencias: backend al menos SPR-B001 o handoff equivalente.
 
-### SPR-F001 — Shell: login + 2FA + selector sucursal + layout + guards + API client
-- Cierra: BRD-REQ-001..003, 006..011, 015
-- Incluye: manejo sesión, refresh, guardas, base UI en español
+### SPR-F002 — RBAC UI (roles/permisos visibles)
+- Cierra: BRD-REQ-003, BRD-REQ-025
+- Entrega: ocultar/deshabilitar acciones según permisos, mensajes claros (“no autorizado”), protección rutas.
 
-### SPR-F002 — Agenda UI (semana): listar + crear/editar + estados + override con reason
-- Cierra: BRD-REQ-018..025
-- Incluye: calendario semana, formularios, errores 409/403 claros
+### SPR-F003 — Agenda semana + crear/editar cita (sin solape)
+- Cierra: BRD-REQ-007, BRD-REQ-025
+- Entrega: vista semanal, formulario crear/editar, validaciones, manejo 409 (conflicto) con UX clara.
 
-### SPR-F003 — Clientes + consentimientos UI
-- Cierra: BRD-REQ-026..027
-- Incluye: lista+detalle+form; consentimientos editables
+### SPR-F004 — Acciones de cita (confirm/cancel/check-in/start/close)
+- Cierra: BRD-REQ-008
+- Entrega: botones por estado, confirmaciones, captura de motivos (cancel), auditoría reason cuando aplique (override).
 
-### SPR-F004 — Mascotas UI + alertas visibles + código interno
-- Cierra: BRD-REQ-028..030
-- Incluye: alertas en header de mascota/atención
+### SPR-F005 — Clientes (CRM)
+- Cierra: BRD-REQ-009
+- Entrega: listado + ficha + edición, consentimientos, búsqueda/paginación básica.
 
-### SPR-F005 — Atenciones + SOAP UI + adjuntos + cierre/reapertura
-- Cierra: BRD-REQ-031..035
-- Incluye: editor SOAP, bloqueo al cerrar, solicitud reapertura
+### SPR-F006 — Mascotas
+- Cierra: BRD-REQ-010
+- Entrega: listado por cliente, ficha mascota, validaciones, internal_code.
 
-### SPR-F006 — Servicios + prescripciones + impresión (HTML/PDF)
-- Cierra: BRD-REQ-036..038
+### SPR-F007 — Atención SOAP + plantillas
+- Cierra: BRD-REQ-011, BRD-REQ-025
+- Entrega: UI SOAP, aplicar plantilla por servicio, crear atención desde cita o independiente.
 
-### SPR-F007 — Facturación UI: factura por atención + descuentos + pagos parciales/mixtos + anulación
-- Cierra: BRD-REQ-046..051
+### SPR-F008 — Adjuntos historia clínica
+- Cierra: BRD-REQ-011
+- Entrega: subir/ver/descargar adjuntos, validación tamaño/tipo, feedback UX.
 
-### SPR-F008 — Inventario UI: productos + movimientos + mínimos + overrides
-- Cierra: BRD-REQ-039..043
+### SPR-F009 — Cierre/reapertura de HC (reason)
+- Cierra: BRD-REQ-012
+- Entrega: cerrar atención/HC, reapertura (según permisos), captura reason, mensajes.
 
-### SPR-F009 — Reportes UI + export + dashboard por rol
-- Cierra: BRD-REQ-052..057
+### SPR-F010 — Catálogo servicios + BOM + prescripción UI
+- Cierra: BRD-REQ-013, BRD-REQ-014, BRD-REQ-016
+- Entrega: UI gestión servicios, edición BOM, captura prescripciones estructuradas, export (HTML/PDF si backend lo expone).
 
-### SPR-F010 — Pulido vendible: permisos UI, mensajes, accesibilidad base, UX final
-- Cierra: NFR/DoD + demo estable
+### SPR-F011 — Inventario (stock, movimientos, alertas, overrides)
+- Cierra: BRD-REQ-015
+- Entrega: listado productos, stock por branch, movimientos, alertas mínimos, override con reason.
+
+### SPR-F012 — Facturación (desde atención) + pagos
+- Cierra: BRD-REQ-017
+- Entrega: UI factura desde atención, descuentos, pagos parciales/mixtos, estados.
+
+### SPR-F013 — Factura: export + anulación
+- Cierra: BRD-REQ-018
+- Entrega: export, anulación con reason, feedback UX, protección permisos.
+
+### SPR-F014 — Reportes + dashboard por rol
+- Cierra: BRD-REQ-023, BRD-REQ-024
+- Entrega: reportes mínimos + export, home dashboard.
+
+### SPR-F015 — Pulido vendible (a11y/perf/empty states) + “demo path”
+- Cierra: BRD-REQ-025, BRD-REQ-020 (demo usabilidad)
+- Entrega: estados vacíos, loaders, consistencia visual, recorrido demo 2–3 min (guía en UI o runbook).
+
+### SPR-RC002 — Release Candidate local (frontend)
+- Cierra: BRD-REQ-019
+- Entrega: build, verificación env, smoke manual de UI, runbook actualizado, evidencia completa.
+
+## 3) Regla de aceptación
+Para congelar este master, el usuario debe responder exactamente:
+- “Acepto el plan maestro FRONT tal cual”
 
 <!-- EOF -->

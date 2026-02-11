@@ -1,24 +1,25 @@
-# ADR-0003 - Tenancy y Scoping
-
-## Estado
-ACCEPTED
+# ADR-0003 — Tenancy/Scoping (single-tenant + multi-sucursal)
 
 ## Contexto
-V1 requiere aislamiento operativo por sucursal sin implementar multi-tenant completo.
+V1 es single-tenant, pero debe soportar varias sucursales con separación estricta de datos.
 
-## Decision
-- V1 es single-tenant y multi-sucursal.
-- `branch_id` en JWT es fuente de verdad.
-- `X-Branch-Id` es obligatorio en endpoints branch-scoped.
-- Si falta header: 400. Si no coincide con claim: 403.
+## Decisión
+- No hay tenant_id en v1.
+- Sucursales:
+  - `branch_id` en JWT es la fuente de verdad
+  - Header `X-Branch-Id` obligatorio en endpoints branch-scoped
+  - Validación:
+    - falta header → 400
+    - mismatch header vs claim → 403
+- Branch-scoped por defecto para: agenda, clientes, mascotas, atenciones, inventario, facturación, reportes.
 
 ## Consecuencias
-- Todo modulo branch-scoped debe validar contexto de sucursal.
-- Seeds y smoke deben cubrir al menos dos sucursales.
+- Evita fuga de datos entre sucursales.
+- Requiere disciplina: todo endpoint branch-scoped debe aplicar regla.
 
 ## Alternativas descartadas
-- Scoping solo por header: descartado por inseguro.
-- Sin header explicito: descartado por baja trazabilidad operacional.
+- Header como fuente de verdad sin claim (riesgo de spoof).
+- Multi-tenant v1 (fuera de alcance).
 
 ## Fecha
 2026-02-11

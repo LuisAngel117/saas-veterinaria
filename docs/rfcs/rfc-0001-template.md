@@ -1,49 +1,35 @@
-# RFC Template
+# RFC-0001 — Template
 
-## Metadata
-- RFC ID: RFC-XXXX
-- Titulo:
-- Autor:
-- Fecha:
-- Estado: DRAFT | REVIEW | ACCEPTED | REJECTED | SUPERSEDED
-- Archivos impactados:
+**Estado:** DRAFT  
+**Fecha:** 2026-02-11  
+**Autor:** TBD
 
-## Contexto
-Describir problema actual y por que no se resuelve con las reglas/documentos vigentes.
+## 1) Contexto
+TBD
 
-## Propuesta
-Describir cambio propuesto en terminos funcionales y tecnicos.
+## 2) Problema
+TBD
 
-## Alcance
-- Incluye:
-- Excluye:
+## 3) Opciones
+- Opción A: TBD
+- Opción B: TBD
 
-## Impacto
-- BRD/RTM:
-- Arquitectura/Seguridad:
-- Dominio/UX:
-- Runbook/Scripts:
+## 4) Decisión propuesta
+TBD
 
-## Riesgos y mitigaciones
-- Riesgo 1:
-- Mitigacion 1:
+## 5) Impacto
+- Impacto técnico: TBD
+- Impacto UX: TBD
+- Impacto seguridad: TBD
+- Impacto datos/migraciones: TBD
 
-## Plan de implementacion
-1. Paso 1
-2. Paso 2
-3. Paso 3
+## 6) Plan de implementación
+TBD (pasos concretos + sprints afectados)
 
-## Plan de validacion
-- Comandos:
-- Criterios de aceptacion:
-- Evidencia esperada en status/log:
+## 7) Riesgos
+TBD
 
-## Rollback
-Describir como revertir o desactivar el cambio sin romper coherencia.
-
-## Decision final
-- Resultado:
-- Fecha:
-- Aprobador:
+## 8) Archivos a cambiar (si se aprueba)
+Lista exacta de paths.
 
 <!-- EOF -->

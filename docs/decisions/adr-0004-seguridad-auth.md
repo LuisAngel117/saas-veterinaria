@@ -1,27 +1,23 @@
-# ADR-0004 - Seguridad y Auth
-
-## Estado
-ACCEPTED
+# ADR-0004 — Seguridad/Auth
 
 ## Contexto
-Se requiere seguridad robusta para demo local vendible y auditable.
+La demo debe ser vendible y segura: sesión robusta, lockout, 2FA para admins, y permisos por acción.
 
-## Decision
-- Login usuario/password.
-- JWT access (1h) + refresh (7d) con rotacion.
-- Lockout de 4 intentos fallidos por 15 minutos.
-- Password policy minima: 10 chars, mayuscula, minuscula, numero y simbolo.
-- 2FA TOTP (RFC 6238) para ADMIN/SUPERADMIN.
-- CORS local controlado para frontend autorizado.
-- Errores estandarizados con RFC 7807.
+## Decisión
+- JWT access (1h) + refresh (7d) con rotación
+- Logout invalida refresh
+- Lockout: 4 intentos → 15 min
+- 2FA TOTP para ADMIN/SUPERADMIN
+- Permisos por acción + reason required en sensibles
+- Errores estándar: Problem Details
 
 ## Consecuencias
-- Eventos auth deben quedar auditados.
-- Flujos de 2FA y recuperacion requieren evidencia de pruebas.
+- Debe persistirse estado de refresh tokens (server-side) y lockout.
+- UX de login contempla challenge 2FA.
 
 ## Alternativas descartadas
-- Auth sin 2FA para perfiles administrativos: descartado por riesgo.
-- Tokens sin rotacion refresh: descartado por seguridad.
+- Access token largo sin refresh (peor UX/seguridad).
+- 2FA para todos (fricción innecesaria en v1).
 
 ## Fecha
 2026-02-11

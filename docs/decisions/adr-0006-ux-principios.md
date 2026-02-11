@@ -1,25 +1,22 @@
-# ADR-0006 - Principios UX/UI
-
-## Estado
-ACCEPTED
+# ADR-0006 — UX principios (UI vendible)
 
 ## Contexto
-La demo debe ser clara, rapida y operable por rol, sin esconder restricciones de permisos o validaciones de negocio.
+El proyecto se usa para portafolio: debe “sentirse producto”, con UX clara por rol.
 
-## Decision
-- UI en espanol con flujos por rol.
-- Mostrar siempre estado actual y siguiente paso sugerido.
-- Acciones bloqueadas por permiso deben explicarse en UI.
-- Flujo core demostrable: agenda -> atencion -> facturacion -> pago -> reporte.
-- Coherencia de agenda: check-in separado del estado de cita.
+## Decisión
+- UI en español.
+- Flujos core con mínimos clics: cita → check-in → atención SOAP → cierre → factura → pago → reporte.
+- Errores claros (403/400/409) con mensajes accionables.
+- Permisos visibles: ocultar/deshabilitar con explicación.
+- Offline-first: online-only como placeholder “pendiente de enviar” con feature flag.
 
 ## Consecuencias
-- La UX prioriza operacion y legibilidad sobre complejidad visual.
-- Cambios de flujo core requieren actualizacion de BRD y ADR/RFC.
+- Requiere consistencia visual y mensajes estandarizados.
+- FRONT depende del handoff backend para no inventar contratos.
 
 ## Alternativas descartadas
-- UI opaca sin explicacion de permisos: descartada por friccion operativa.
-- Check-in como estado extra: descartado por incoherencia con contrato BRD.
+- UI genérica sin roles (confuso).
+- Pantallas aisladas sin integración (piezas sueltas).
 
 ## Fecha
 2026-02-11

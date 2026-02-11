@@ -41,23 +41,37 @@ Formato por entrada:
 - Resultado:
   - READY_FOR_VALIDATION (al finalizar la aplicación y pasar scripts)
 
-## 2026-02-11T08:01:29-05:00 (America/Guayaquil)
+## 2026-02-11T00:30:00-05:00 (America/Guayaquil)
 - Sprint/Tanda: T3
-- Que cambio:
-  - Gobernanza: indice, DoR/DoD, ADRs, RFC template, AGENTS, project-lock.
-  - Coherencia agenda: check-in separado; sin estados extra de cita.
-  - Actualizacion de changelog y status.
+- Qué cambió:
+  - Se definió índice canónico (orden de lectura y reglas)
+  - Se definieron Quality Gates DoR/DoD
+  - Se añadieron ADRs (stack/arquitectura/scoping/seguridad/auditoría/ux/walking-skeleton)
+  - Se añadió plantilla RFC
+  - Se añadió AGENTS.md (conducta del agente)
+  - Se actualizó project-lock (repo/path reales)
+  - Se corrigió coherencia agenda: estados exactos + check-in separado (sin estado extra)
 - Comandos ejecutados:
-  - git status --porcelain
-  - git config user.name; git config user.email
-  - git remote -v
-  - git rev-parse --abbrev-ref HEAD
-  - powershell -ExecutionPolicy Bypass -File scripts/verify/verify-docs-eof.ps1
-  - powershell -ExecutionPolicy Bypass -File scripts/verify/preflight.ps1
-  - git rev-parse HEAD
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
 - Output:
   - PEGAR OUTPUT AQUÍ
 - Resultado:
-  - IN_PROGRESS (se marcara READY_FOR_VALIDATION al cerrar commit T3)
+  - READY_FOR_VALIDATION
+
+## 2026-02-11T00:40:00-05:00 (America/Guayaquil)
+- Sprint/Tanda: T4
+- Qué cambió:
+  - BRD con BRD-REQ estables
+  - RTM inicial mapeada a sprints propuestos
+  - State snapshot actualizado
+  - Masters BACK/FRONT en DRAFT listos para aceptación
+- Comandos ejecutados:
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - READY_FOR_VALIDATION
 
 <!-- EOF -->

@@ -1,24 +1,22 @@
-# ADR-0002 - Arquitectura
-
-## Estado
-ACCEPTED
+# ADR-0002 — Arquitectura (monolito modular)
 
 ## Contexto
-El proyecto necesita entregas incrementales sin piezas sueltas y con trazabilidad entre requerimiento, codigo y evidencia.
+Se requiere velocidad de entrega, coherencia y trazabilidad, evitando microservicios y capas desconectadas.
 
-## Decision
-- Backend en monolito modular por capas (`web/api`, `application`, `domain`, `infrastructure`).
-- Frontend desacoplado por modulos funcionales sobre contratos API estables.
-- Errores API bajo Problem Details (RFC 7807).
-- Gobernanza obligatoria: DoR/DoD + RTM + status/log + ADR/RFC/changelog.
+## Decisión
+Usar monolito modular:
+- módulos claros (auth, branch, agenda, crm, clinic, catalog, inventory, billing, reports, audit)
+- reglas de negocio en dominio/aplicación
+- persistencia JPA por módulo
+- API REST `/api/v1` con Problem Details
 
 ## Consecuencias
-- Cambios de contrato deben pasar por RFC/ADR antes de ejecucion.
-- Cada sprint debe cerrar evidencia documental junto con el incremento tecnico.
+- Integración más simple y demo más rápida.
+- Necesita gobernanza fuerte para no degenerar en “big ball of mud”.
 
 ## Alternativas descartadas
-- Microservicios tempranos: descartados por complejidad innecesaria en fase actual.
-- Documentacion no versionada: descartada por riesgo de divergencia.
+- Microservicios (sobre-complejidad para v1 demo).
+- Backend “solo CRUD” sin invariantes (riesgo de bugs).
 
 ## Fecha
 2026-02-11

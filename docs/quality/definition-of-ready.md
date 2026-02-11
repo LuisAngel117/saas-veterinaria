@@ -1,19 +1,39 @@
 # Definition of Ready (DoR)
 
-Un sprint NO puede iniciar si no cumple DoR. Si falla, debe quedar en `BLOCKED` con nota `DoR FAIL`.
+Propósito: bloquear sprints que arrancan con huecos o decisiones faltantes.
 
-## Checklist DoR (verificable)
-- [ ] `project-lock.md` existe y `repo_url` coincide con `git remote -v`.
-- [ ] `docs/state/state.md` esta actualizado (decisiones cerradas, pendientes, riesgos).
-- [ ] `docs/02-brd.md` incluye los `BRD-REQ-###` que el sprint tocara.
-- [ ] El sprint declara `incluye/excluye` y mapea `BRD-REQ-###` explicitamente.
-- [ ] AC verificables y no ambiguos (con resultados observables).
-- [ ] Dependencias detectadas (backend/frontend/db/scripts/docs).
-- [ ] Seguridad/scoping relevantes ya definidos o existe RFC/ADR abierto.
-- [ ] Plan de verificacion definido (smoke y comandos exactos).
-- [ ] Impacto en RTM/status/log/state identificado antes de empezar.
-- [ ] Coherencia agenda validada: check-in separado, sin estados extra inventados.
-- [ ] Paths canonicos y linux-strict (case consistente, sin duplicados por casing).
-- [ ] Riesgos/huecos documentados; si bloquean, quedan en RFC/ADR.
+## Checklist DoR (obligatorio)
+### Alcance y decisiones
+- [ ] Sprint ID y título existen en `spr-master-*.md`.
+- [ ] Sprint declara BRD-REQ objetivo (o N/A con justificación).
+- [ ] No hay contradicciones con `docs/02-brd.md` y `docs/03-arquitectura.md`.
+- [ ] Si hay cambios a decisiones (scoping/seguridad/arquitectura): existe RFC/ADR.
+
+### Datos y scoping
+- [ ] Está definido si el endpoint/entidad es branch-scoped o global.
+- [ ] Reglas de `X-Branch-Id` vs `branch_id` del JWT claras para el sprint.
+
+### Seguridad y permisos
+- [ ] Permisos necesarios están definidos en `docs/10-permisos.md`.
+- [ ] Si hay acción sensible: “reason required” definido + auditoría requerida.
+
+### UX/contratos (si aplica)
+- [ ] Para FRONT: existe `docs/handoff/handoff-back-to-front.md` actualizado (si integra).
+- [ ] Errores esperados (Problem Details) definidos para el flujo del sprint.
+
+### Pruebas y evidencia
+- [ ] AC verificables (checklist).
+- [ ] Smoke/manual definido (comandos exactos) o marcado N/A con razón.
+- [ ] Se define qué evidencia se dejará en LOG/STATUS/RTM.
+
+## Qué bloquea el sprint
+- Si falta cualquier ítem crítico (alcance, decisiones, scoping, permisos, AC): **BLOCKED**.
+- Si requiere RFC/ADR y no existe: **BLOCKED**.
+
+## Excepciones
+- Solo por RFC aprobado, documentando:
+  - qué se omite
+  - riesgo
+  - plan de cierre posterior
 
 <!-- EOF -->

@@ -24,5 +24,7 @@ created_at: 2026-02-11T00:00:00-05:00
 updated_at: 2026-02-11T08:00:00-05:00
 
 Regla: antes de cualquier cambio, validar `git remote -v` y `git rev-parse --abbrev-ref HEAD` contra este lock.
+- Si el remote actual NO coincide con repo_url: DETENER (repo mismatch).
+- Prohibido mezclar dominios/proyectos en docs, commits o código.
 
 <!-- EOF -->

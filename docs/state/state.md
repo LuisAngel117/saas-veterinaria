@@ -1,35 +1,40 @@
-# State snapshot (entrada de contexto)
+# State Snapshot
 
-## Resumen actual
-El repo está en fase de documentación base. T1 define estructura y scripts de verificación; T2 define el contrato funcional (BRD-REQ-###), arquitectura, seguridad, dominio y UX. Aún no hay implementación backend/frontend.
+## 1) Resumen actual
+Proyecto nuevo “SaaSVeterinaria” (repo: saas-veterinaria). La documentación contractual ya define: alcance v1, decisiones clave (ADRs), quality gates (DoR/DoD), BRD con IDs estables, RTM inicial, y masters BACK/FRONT en estado DRAFT para aceptación.
 
-## Decisiones cerradas (contrato)
-- V1: single-tenant + multi-sucursal (branches).
-- Scoping: `branch_id` en JWT (fuente de verdad) + `X-Branch-Id` obligatorio en endpoints branch-scoped; mismatch → 403; falta header → 400.
-- Roles: SUPERADMIN, ADMIN, RECEPCION, VETERINARIO. Permisos por acción + reason required en sensibles.
-- Agenda: no-solape por **Sala + Veterinario**, slot 30m, buffer default 10m, vista semana, check-in separado, override con permiso+reason+auditoría.
-- HC SOAP: atención puede existir sin cita; plantillas por servicio; adjuntos PDF/imagen hasta 10MB; cierre con bloqueo; reapertura gobernada por permisos.
-- Facturación interna: IVA global configurable (default 15%) solo SUPERADMIN auditable; pagos mixtos/parciales; export CSV/PDF; SRI e-factura fuera de alcance (placeholder con flag).
-- Inventario: stock por sucursal; BOM por servicio; costeo promedio ponderado; bloqueo por stock con override (permiso+reason+auditoría).
-- Errores API: Problem Details (RFC 7807).
-- 2FA: TOTP para ADMIN/SUPERADMIN (RFC 6238).
-- Stack objetivo: Java 21 + Spring Boot + Postgres 17 + Flyway + Next.js (TS) + Tailwind/shadcn + OpenAPI.
-- Offline-first real: core sin dependencias externas; online-only con feature flags + placeholders.
+## 2) Decisiones cerradas (ADRs)
+- Stack: `docs/decisions/adr-0001-stack.md`
+- Arquitectura: `docs/decisions/adr-0002-arquitectura.md`
+- Scoping: `docs/decisions/adr-0003-tenancy-scoping.md`
+- Seguridad/Auth: `docs/decisions/adr-0004-seguridad-auth.md`
+- Auditoría: `docs/decisions/adr-0005-auditoria.md`
+- UX principios: `docs/decisions/adr-0006-ux-principios.md`
+- Walking skeleton: `docs/decisions/adr-0007-walking-skeleton.md`
 
-## Requerimientos (BRD-REQ)
-- Definidos en `docs/02-brd.md`.
-- RTM inicial en `docs/traceability/rtm.md` (a completar con asignación a sprints).
+## 3) Requerimientos (BRD-REQ) — estado
+- P0 definidos en `docs/02-brd.md` (BRD-REQ-001..022).
+- P1 definidos (BRD-REQ-023..025).
+- Online-only placeholders (BRD-REQ-026..027) definidos como fuera de alcance v1 real.
 
-## Estado de tandas/sprints
-Ver `docs/status/status.md`.
+## 4) Estado de sprints/tandas
+Referencia: `docs/status/status.md`
+- T1/T2/T3: documentación base + gobernanza (READY_FOR_VALIDATION según evidencia).
+- T4: BRD-REQ + RTM + masters (READY_FOR_VALIDATION después del commit T4).
+- Masters:
+  - `docs/sprints/spr-master-back.md` = DRAFT
+  - `docs/sprints/spr-master-front.md` = DRAFT
 
-## Próximo paso recomendado (FASE D)
-Congelar planes maestros por pista (BACK y FRONT) con IDs SPR-B### / SPR-F### mapeados a BRD-REQ-### y pedir aceptación textual:
-- “Acepto el plan maestro BACK tal cual”
-- “Acepto el plan maestro FRONT tal cual”
+## 5) Próximo paso recomendado (bloqueante)
+1) Usuario revisa masters.
+2) Usuario responde exactamente:
+   - “Acepto el plan maestro BACK tal cual”
+   - “Acepto el plan maestro FRONT tal cual”
+3) Luego se genera el primer sprint detallado:
+   - BACK: SPR-B001 (Walking Skeleton)
 
-## Riesgos/bloqueos actuales
-- Masters aún en DRAFT hasta mapear 100% BRD-REQ P0/P1.
-- Runbook contiene comandos objetivo que deben implementarse en sprints (no asumir existentes).
+## 6) Riesgos/bloqueos actuales
+- Si no se aceptan masters, no se deben generar sprints detallados.
+- Cualquier cambio a scoping/agenda/seguridad exige RFC/ADR.
 
 <!-- EOF -->
