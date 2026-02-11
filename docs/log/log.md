@@ -147,4 +147,118 @@ Formato por entrada:
 - Resultado:
   - READY_FOR_VALIDATION
 
+## 2026-02-11T12:14:09-05:00 (America/Guayaquil)
+- Sprint/Tanda: CATALOG-BACK-001
+- Qué cambió:
+  - Se creó `docs/state/catalog-back-sprints-001.md` con el catálogo canónico de sprints BACK.
+  - Se validó la secuencia `SPR-B###` sin huecos según `docs/sprints/spr-master-back.md`.
+  - Se cruzó cada sprint del master contra `docs/status/status.md`.
+  - Se actualizó `docs/status/status.md` y `docs/changelog.md`.
+- Comandos ejecutados:
+  - Get-Content -Raw docs/project-lock.md
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - Get-Content -Raw AGENTS.md
+  - Get-Content -Raw docs/00-indice.md
+  - Get-Content -Raw docs/state/state.md
+  - Get-Content -Raw docs/quality/definition-of-ready.md
+  - Get-Content -Raw docs/sprints/spr-master-back.md
+  - Get-Content -Raw docs/status/status.md
+  - Get-Content -Raw docs/log/log.md
+  - if (Test-Path docs/traceability/rtm.md) { Get-Content -Raw docs/traceability/rtm.md }
+  - Get-ChildItem docs/sprints -File | Select-Object -ExpandProperty Name
+  - rg -n "^###" docs/sprints/spr-master-back.md
+  - Script PowerShell de extraccion de IDs/BRD/dependencias + validacion de huecos + cruce con status
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - READY_FOR_VALIDATION
+
+## 2026-02-11T12:34:21-05:00 (America/Guayaquil)
+- Sprint/Tanda: DOCS-BACK-SPRINTS-001
+- Qué cambió:
+  - Se crearon los sprints BACK faltantes en `docs/sprints/`: `SPR-B007` a `SPR-B019` y `SPR-RC001`.
+  - Se normalizo `docs/status/status.md` agregando filas `NOT_STARTED` para `SPR-B002` a `SPR-B019` y `SPR-RC001`.
+  - Se agrego fila de control `DOCS-BACK-SPRINTS-001` en `docs/status/status.md`.
+  - Se actualizo `docs/changelog.md` en Unreleased.
+- Comandos ejecutados:
+  - Get-Content -Raw docs/project-lock.md
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - Get-Content -Raw AGENTS.md
+  - Get-Content -Raw docs/00-indice.md
+  - Get-Content -Raw docs/state/state.md
+  - Get-Content -Raw docs/quality/definition-of-ready.md
+  - Get-Content -Raw docs/quality/definition-of-done.md
+  - Get-Content -Raw docs/sprints/spr-master-back.md
+  - Get-Content -Raw docs/status/status.md
+  - Get-Content -Raw docs/log/log.md
+  - Get-Content -Raw docs/sprints/spr-b001.md
+  - Get-Content -Raw docs/sprints/spr-b002.md
+  - Get-Content -Raw docs/sprints/SPR-B003.md
+  - Get-Content -Raw docs/sprints/spr-b004.md
+  - Get-Content -Raw docs/sprints/spr-b005.md
+  - Get-Content -Raw docs/sprints/spr-b006.md
+  - Script PowerShell para generar `spr-b007.md`..`spr-b019.md` y `spr-rc001.md` desde master BACK
+  - pwsh -ExecutionPolicy Bypass -File .\\scripts\\verify\\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\\scripts\\verify\\preflight.ps1
+- Output:
+  - PEGAR OUTPUT AQUI
+- Resultado:
+  - READY_FOR_VALIDATION
+
+## 2026-02-11T12:39:03-05:00 (America/Guayaquil)
+- Sprint/Tanda: DOCS-BACK-SPRINTS-002
+- Qué cambió:
+  - Se completaron `docs/sprints/spr-b002.md`, `docs/sprints/SPR-B003.md`, `docs/sprints/spr-b004.md`, `docs/sprints/spr-b005.md` y `docs/sprints/spr-b006.md`.
+  - Se corrigio el placeholder de plantilla en `SPR-B007` a `SPR-B019` y `SPR-RC001` para dejar IDs fijos por sprint.
+  - Se actualizo `docs/status/status.md` y `docs/changelog.md`.
+- Comandos ejecutados:
+  - Get-Content -Raw docs/project-lock.md
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - Get-Content -Raw AGENTS.md
+  - Get-Content -Raw docs/00-indice.md
+  - Get-Content -Raw docs/state/state.md
+  - Get-Content -Raw docs/quality/definition-of-ready.md
+  - Get-Content -Raw docs/quality/definition-of-done.md
+  - Get-Content -Raw docs/sprints/spr-master-back.md
+  - Get-Content -Raw docs/status/status.md
+  - Get-Content -Raw docs/log/log.md
+  - Script PowerShell para regenerar `SPR-B002..SPR-B019` y `SPR-RC001` desde master BACK
+  - rg -n '\\$id|System\\.Collections\\.Specialized\\.OrderedDictionary\\.ID' docs/sprints
+  - pwsh -ExecutionPolicy Bypass -File .\\scripts\\verify\\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\\scripts\\verify\\preflight.ps1
+- Output:
+  - PEGAR OUTPUT AQUI
+- Resultado:
+  - READY_FOR_VALIDATION
+
+## 2026-02-11T12:45:23-05:00 (America/Guayaquil)
+- Sprint/Tanda: DOCS-BACK-SPRINTS-003
+- Qué cambió:
+  - Se elevó el nivel de detalle de `SPR-B002` a `SPR-B019` y `SPR-RC001` con una plantilla extendida.
+  - Cada sprint ahora incluye objetivo detallado, BRD-REQ objetivo con descripcion, alcance incluye/excluye, pre-check, entregables, instrucciones cerradas, AC, smoke manual, comandos verdad, DoD, continuidad y manejo de huecos.
+  - El contenido se mantuvo alineado a `docs/sprints/spr-master-back.md` y `docs/02-brd.md`, sin implementar features.
+  - Se actualizo `docs/status/status.md` y `docs/changelog.md`.
+- Comandos ejecutados:
+  - Get-Content -Raw docs/sprints/spr-b001.md
+  - Get-Content -Raw docs/sprints/spr-b002.md
+  - Get-Content -Raw docs/sprints/spr-b007.md
+  - Get-Content -Raw docs/02-brd.md
+  - Get-Content -Raw docs/sprints/spr-master-back.md
+  - Script PowerShell para regenerar `SPR-B002..SPR-B019` y `SPR-RC001` con plantilla extendida (master + BRD)
+  - Get-Content -Raw docs/sprints/spr-b002.md
+  - Get-Content -Raw docs/sprints/spr-b007.md
+  - Get-Content -Raw docs/sprints/spr-b017.md
+  - Get-Content -Raw docs/sprints/spr-rc001.md
+  - pwsh -ExecutionPolicy Bypass -File .\\scripts\\verify\\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\\scripts\\verify\\preflight.ps1
+- Output:
+  - PEGAR OUTPUT AQUI
+- Resultado:
+  - READY_FOR_VALIDATION
+
 <!-- EOF -->
