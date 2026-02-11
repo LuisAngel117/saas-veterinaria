@@ -33,7 +33,7 @@ Impacto:
 ## 5) Resolucion aplicada
 - Se agrego baseline backend con `pom.xml`, Maven Wrapper y estructura Spring Boot.
 - Se unifico el contrato de rutas a `/api/v1` en `docs/sprints/spr-b001.md`.
-- `SPR-B001` pasa a revalidacion DoR (ver status/log/rtm/state).
+- `SPR-B001` pasa a READY_FOR_VALIDATION (evidencia: 22866051cf290bb76a0f8567ed8f8992cb624473).
 
 ## 6) Cambios de trazabilidad aplicados
 - `docs/status/status.md`: `SPR-B001` -> `READY_FOR_VALIDATION` tras ejecucion.
