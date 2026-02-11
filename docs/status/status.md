@@ -32,9 +32,26 @@ Regla: DONE solo tras validación local del usuario con evidencia en `docs/log/l
 | SPR-B018 | Reportes minimos (backend) | NOT_STARTED |  | BRD-REQ-023 |
 | SPR-B019 | Hardening (validaciones, constraints, limpieza, performance basica) | NOT_STARTED |  | BRD-REQ-019 (parcial), BRD-REQ-022, NFR |
 | SPR-RC001 | Release Candidate local (backend) | NOT_STARTED |  | BRD-REQ-019, BRD-REQ-021 |
+| SPR-F001 | Shell vendible (auth + selector branch + guards + API client) | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F002 | RBAC UI (roles/permisos visibles) | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F003 | Agenda semana + crear/editar cita (sin solape) | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F004 | Acciones de cita (confirm/cancel/check-in/start/close) | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F005 | Clientes (CRM) | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F006 | Mascotas | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F007 | Atencion SOAP + plantillas | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F008 | Adjuntos historia clinica | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F009 | Cierre/reapertura de HC (reason) | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F010 | Catalogo servicios + BOM + prescripcion UI | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F011 | Inventario (stock, movimientos, alertas, overrides) | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F012 | Facturacion (desde atencion) + pagos | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F013 | Factura: export + anulacion | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F014 | Reportes + dashboard por rol | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-F015 | Pulido vendible (a11y/perf/empty states) + demo path | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
+| SPR-RC002 | Release Candidate local (frontend) | BLOCKED |  | Master FRONT en DRAFT; no ejecutar hasta aceptacion explicita |
 | CATALOG-BACK-001 | Catalogo canonico sprints BACK + validacion secuencia + cruce status | READY_FOR_VALIDATION | TBD | Documento: docs/state/catalog-back-sprints-001.md |
 | DOCS-BACK-SPRINTS-001 | Creacion de sprints BACK faltantes (SPR-B007..SPR-B019 y SPR-RC001) | READY_FOR_VALIDATION | TBD | Documentos en docs/sprints + status/log/changelog actualizados |
 | DOCS-BACK-SPRINTS-002 | Completa SPR-B002..SPR-B006 y corrige plantilla en SPR-B007..SPR-B019/SPR-RC001 | READY_FOR_VALIDATION | TBD | Documentos en docs/sprints + status/log/changelog actualizados |
 | DOCS-BACK-SPRINTS-003 | Aumenta detalle de SPR-B002..SPR-B019 y SPR-RC001 con plantilla extendida alineada a master+BRD | READY_FOR_VALIDATION | TBD | Solo documentacion; sin implementacion de features |
+| DOCS-FRONT-SPRINTS-001 | Crea SPR-F001..SPR-F015 y SPR-RC002 con detalle extendido alineado a master FRONT + BRD + UX + permisos | READY_FOR_VALIDATION | TBD | Solo documentacion; sprints FRONT quedan BLOCKED por master DRAFT |
 
 <!-- EOF -->
