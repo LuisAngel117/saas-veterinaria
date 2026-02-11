@@ -11,5 +11,6 @@ Regla: DONE solo tras validación local del usuario con evidencia en `docs/log/l
 | T4 | BRD-REQ + RTM + state + masters BACK/FRONT (DRAFT) | READY_FOR_VALIDATION | TBD | Pendiente aceptación textual de masters |
 | AUDIT-BACK-001 | Resumen técnico + auditoría de huecos/inconsistencias plan maestro BACK | READY_FOR_VALIDATION | 2f8bd240eb75ba4d4a73baa796ee2f8bfafca4ee | Documento: docs/state/audit-back-master-001.md |
 | AUDIT-FRONT-001 | Resumen técnico + auditoría de huecos/inconsistencias plan maestro FRONT | READY_FOR_VALIDATION | 601268f57c08d7e6bb2fad07780c31770903b1c7 | Documento: docs/state/audit-front-master-001.md |
+| T5 | RFC normalizaciones (estados + project-lock) + aceptación master BACK | READY_FOR_VALIDATION | c8a7ccdbed5c8c4dd15b56b99a9322b9beae8682 | RFC-0002/RFC-0003 + lock canónico + master BACK ACCEPTED |
 
 <!-- EOF -->

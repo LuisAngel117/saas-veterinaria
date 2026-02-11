@@ -109,7 +109,7 @@
 
 ### appointment (cita) (branch-scoped)
 Estados EXACTOS (contrato UX/BRD):
-- RESERVED / CONFIRMED / IN_SERVICE / CLOSED / CANCELLED
+- RESERVED / CONFIRMED / IN_ATTENTION / CLOSED / CANCELLED
 Check-in es un evento separado (no un estado):
 - `check_in_at` timestamp nullable
 
@@ -121,7 +121,7 @@ Check-in es un evento separado (no un estado):
 | vet_user_id | UUID | requerido (user) |
 | client_id | UUID | requerido |
 | pet_id | UUID | requerido |
-| status | text | requerido (RESERVED/CONFIRMED/IN_SERVICE/CLOSED/CANCELLED) |
+| status | text | requerido (RESERVED/CONFIRMED/IN_ATTENTION/CLOSED/CANCELLED) |
 | check_in_at | timestamp | opcional (cuando recepción hace check-in) |
 | start_at | timestamp | requerido |
 | end_at | timestamp | requerido |

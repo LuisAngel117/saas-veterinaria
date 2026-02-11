@@ -17,7 +17,7 @@
 
 ### invoice.status
 - PENDING → PAID
-- ANNULED desde PENDING/PAID (según regla; v1 permitir con reason)
+- ANNULLED desde PENDING/PAID (según regla; v1 permitir con reason)
 
 ## 2) Entidades clínicas y administrativas (tabla mínima)
 
@@ -146,14 +146,14 @@
 | id | UUID | PK |
 | branch_id | UUID | requerido |
 | encounter_id | UUID | requerido (1:1 en v1) |
-| status | text | PENDING/PAID/ANNULED |
+| status | text | PENDING/PAID/ANNULLED |
 | subtotal | numeric | requerido |
 | discount_total | numeric | requerido |
 | tax_rate | numeric | requerido |
 | tax_total | numeric | requerido |
 | total | numeric | requerido |
 | created_at | timestamp | requerido |
-| annulled_reason | text | requerido si ANNULED |
+| annulled_reason | text | requerido si ANNULLED |
 
 ### invoice_item (branch-scoped)
 | Campo | Tipo | Reglas |

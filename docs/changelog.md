@@ -7,5 +7,6 @@
 - T4: BRD con BRD-REQ estables + RTM mapeada a masters + state snapshot + masters BACK/FRONT (DRAFT para aceptación).
 - AUDIT-BACK-001: resumen tecnico completo + auditoria de huecos/inconsistencias del plan maestro BACK.
 - AUDIT-FRONT-001: resumen tecnico completo + auditoria de huecos/inconsistencias del plan maestro FRONT.
+- T5: RFC-0002/RFC-0003 + normalizacion de estados (IN_ATTENTION/ANNULLED) + project-lock canonico en docs/project-lock.md + aceptacion master BACK.
 
 <!-- EOF -->

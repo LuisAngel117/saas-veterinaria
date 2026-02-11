@@ -112,4 +112,25 @@ Formato por entrada:
 - Resultado:
   - READY_FOR_VALIDATION
 
+## 2026-02-11T09:00:00-05:00 (America/Guayaquil)
+- Sprint/Tanda: T5
+- Que cambio:
+  - Se crearon RFC-0002 y RFC-0003 para formalizar normalizaciones contractuales.
+  - Se normalizaron estados de agenda a IN_ATTENTION y de factura a ANNULLED.
+  - Se consolidó project-lock en `docs/project-lock.md` y se eliminó `project-lock.md` de raíz.
+  - Se registró aceptación del plan maestro BACK en `docs/sprints/spr-master-back.md` y `docs/state/state.md`.
+  - Se actualizó changelog y status para T5.
+- Comandos ejecutados:
+  - git status --porcelain
+  - git config user.name; git config user.email
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - pwsh -ExecutionPolicy Bypass -File .\\scripts\\verify\\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\\scripts\\verify\\preflight.ps1
+  - rg -n "IN_SERVICE|\\bVOID\\b|ANNULED|project-lock\\.md" AGENTS.md docs/00-indice.md docs/project-lock.md docs/02-brd.md docs/06-dominio-parte-a.md docs/06-dominio-parte-b.md docs/10-permisos.md docs/sprints/spr-master-back.md docs/state/state.md docs/traceability/rtm.md docs/changelog.md docs/status/status.md docs/log/log.md docs/rfcs/rfc-0002-normalizacion-estados-agenda-y-factura.md docs/rfcs/rfc-0003-normalizacion-project-lock-path.md
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - READY_FOR_VALIDATION
+
 <!-- EOF -->

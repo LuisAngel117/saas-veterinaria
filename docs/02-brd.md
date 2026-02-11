@@ -56,7 +56,7 @@ Excluye (v1):
 ### Agenda / no-solape
 - Recurso compuesto: **Sala + Veterinario**.
 - Conflicto de solape → 409 (Problem Details) salvo override con permiso + reason + auditoría.
-- Estados EXACTOS de cita: RESERVED / CONFIRMED / IN_SERVICE / CLOSED / CANCELLED.
+- Estados EXACTOS de cita: RESERVED / CONFIRMED / IN_ATTENTION / CLOSED / CANCELLED.
 - Check-in es evento separado: `check_in_at` (timestamp), no estado adicional.
 - Slot base v1: 30 minutos. Buffer default: 10 minutos (configurable).
 
@@ -75,7 +75,7 @@ Excluye (v1):
 ### Facturación
 - Factura interna.
 - IVA global configurable (default 15%): solo SUPERADMIN, reason+auditoría.
-- Estados: PENDING / PAID / VOID.
+- Estados: PENDING / PAID / ANNULLED.
 - Anulación siempre requiere reason + auditoría before/after.
 
 ### Inventario

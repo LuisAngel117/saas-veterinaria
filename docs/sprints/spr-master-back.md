@@ -1,7 +1,7 @@
-# SPR-MASTER — BACKEND (DRAFT)
+# SPR-MASTER — BACKEND (ACCEPTED)
 
-**Estado:** DRAFT (no ejecutar sprints hasta aceptación explícita del usuario)  
-**Regla:** una vez aceptado (“Acepto el plan maestro BACK tal cual”), queda congelado; cambios solo por RFC/ADR/CHANGELOG.
+**Estado:** ACCEPTED (2026-02-11, "Acepto el plan maestro BACK tal cual")  
+**Regla:** plan congelado; cambios solo por RFC/ADR/CHANGELOG.
 
 ## 1) Objetivo del plan
 Cerrar P0 del BRD con incrementos integrados y trazables (RTM + LOG/STATUS), manteniendo offline-first real.
@@ -91,7 +91,7 @@ Cerrar P0 del BRD con incrementos integrados y trazables (RTM + LOG/STATUS), man
 
 ### SPR-B017 — Factura: export + anulación
 - Cierra: BRD-REQ-018
-- Entrega: export CSV/PDF, void con reason + before/after, auditoría.
+- Entrega: export CSV/PDF, annul (status ANNULLED) con reason + before/after, auditoría.
 - Excluye: e-factura real.
 
 ### SPR-B018 — Reportes mínimos (backend)
@@ -108,7 +108,7 @@ Cerrar P0 del BRD con incrementos integrados y trazables (RTM + LOG/STATUS), man
 - Entrega: scripts smoke/release-candidate, runbook validado, checklist entrega, evidencia completa en LOG/STATUS/RTM/state.
 
 ## 3) Regla de aceptación
-Para congelar este master, el usuario debe responder exactamente:
-- “Acepto el plan maestro BACK tal cual”
+Aceptación registrada:
+- 2026-02-11: “Acepto el plan maestro BACK tal cual”
 
 <!-- EOF -->

@@ -3,6 +3,7 @@
 ## 1) Identidad (obligatorio)
 Antes de cualquier acción:
 1) Leer `docs/project-lock.md`
+   - Ruta canónica de lock: `docs/project-lock.md` (sin duplicado en raíz).
 2) Verificar `git remote -v` coincide con `repo_url`
 3) Verificar branch y que el proyecto coincide
 

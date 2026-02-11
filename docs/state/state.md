@@ -1,7 +1,7 @@
 # State Snapshot
 
 ## 1) Resumen actual
-Proyecto nuevo “SaaSVeterinaria” (repo: saas-veterinaria). La documentación contractual ya define: alcance v1, decisiones clave (ADRs), quality gates (DoR/DoD), BRD con IDs estables, RTM inicial, y masters BACK/FRONT en estado DRAFT para aceptación.
+Proyecto nuevo “SaaSVeterinaria” (repo: saas-veterinaria). La documentación contractual ya define: alcance v1, decisiones clave (ADRs), quality gates (DoR/DoD), BRD con IDs estables, RTM inicial, master BACK en estado ACCEPTED, y master FRONT en DRAFT para aceptación.
 
 ## 2) Decisiones cerradas (ADRs)
 - Stack: `docs/decisions/adr-0001-stack.md`
@@ -21,20 +21,23 @@ Proyecto nuevo “SaaSVeterinaria” (repo: saas-veterinaria). La documentación
 Referencia: `docs/status/status.md`
 - T1/T2/T3: documentación base + gobernanza (READY_FOR_VALIDATION según evidencia).
 - T4: BRD-REQ + RTM + masters (READY_FOR_VALIDATION después del commit T4).
+- T5: normalizaciones contractuales (estados + project-lock) + aceptación del master BACK.
 - Masters:
-  - `docs/sprints/spr-master-back.md` = DRAFT
+  - `docs/sprints/spr-master-back.md` = ACCEPTED
   - `docs/sprints/spr-master-front.md` = DRAFT
+- Registro explícito:
+  - 2026-02-11: "Plan maestro BACK aceptado tal cual".
 
 ## 5) Próximo paso recomendado (bloqueante)
-1) Usuario revisa masters.
+1) Usuario revisa master FRONT.
 2) Usuario responde exactamente:
-   - “Acepto el plan maestro BACK tal cual”
    - “Acepto el plan maestro FRONT tal cual”
-3) Luego se genera el primer sprint detallado:
+3) Luego se generan sprints detallados:
    - BACK: SPR-B001 (Walking Skeleton)
+   - FRONT: SPR-F001 (setup shell + auth bootstrap)
 
 ## 6) Riesgos/bloqueos actuales
-- Si no se aceptan masters, no se deben generar sprints detallados.
+- Si no se acepta master FRONT, no se deben generar sprints FRONT detallados.
 - Cualquier cambio a scoping/agenda/seguridad exige RFC/ADR.
 
 <!-- EOF -->

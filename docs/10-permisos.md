@@ -70,6 +70,7 @@
 - INVOICE_PRICE_OVERRIDE (reason required)
 - PAYMENT_CREATE
 - INVOICE_ANNUL (reason required)
+- Estado canonico de factura en el contrato: PENDING / PAID / ANNULLED.
 
 ### Reportes
 - REPORT_VIEW

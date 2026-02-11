@@ -73,6 +73,7 @@ Este archivo define el mapa canónico de documentación y el orden de lectura ob
 - Cambios a arquitectura/seguridad/scoping/requisitos:
   - RFC (docs/rfcs/...) + (si aplica) ADR + changelog.
 - No se edita un sprint bloqueado sin RFC/ADR.
+- Project lock canónico: `docs/project-lock.md` (sin duplicado en raíz).
 
 ## 7) Nombres linux-friendly y regla de EOF
 - Todos los `.md` bajo `docs/**` terminan EXACTO con `<!-- EOF -->`.
