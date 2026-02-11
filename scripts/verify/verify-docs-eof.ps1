@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $root = Split-Path -Parent $PSScriptRoot
-$docsPath = Join-Path $root "..\..\docs"
+$docsPath = Join-Path $root "..\docs"
 
 if (-not (Test-Path $docsPath)) {
   Write-Error "No existe la carpeta 'docs' en la raíz del repo (esperado en: $docsPath)."
