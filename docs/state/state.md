@@ -23,7 +23,7 @@ Referencia: `docs/status/status.md`
 - T4: BRD-REQ + RTM + masters (READY_FOR_VALIDATION después del commit T4).
 - T5: normalizaciones contractuales (estados + project-lock) + aceptación del master BACK.
 - Catálogo/plantillas de sprints: BACK y FRONT documentados en `docs/sprints/` (ver filas `SPR-*` en `docs/status/status.md`).
-- SPR-B001: BLOCKED por DoR (RFC-0004).
+- SPR-B001: ejecutado y en READY_FOR_VALIDATION (ver status/rtm/log).
 - Masters:
   - `docs/sprints/spr-master-back.md` = ACCEPTED
   - `docs/sprints/spr-master-front.md` = DRAFT
@@ -31,17 +31,13 @@ Referencia: `docs/status/status.md`
   - 2026-02-11: "Plan maestro BACK aceptado tal cual".
 
 ## 5) Próximo paso recomendado (bloqueante)
-1) Resolver RFC-0004:
-   - definir baseline backend minimo en repo
-   - unificar contrato de rutas (`/api` vs `/api/v1`)
-2) Revalidar DoR de `SPR-B001` y, si pasa, iniciar ejecución.
-3) Usuario revisa master FRONT.
-4) Usuario responde exactamente:
+1) Usuario valida SPR-B001 (READY_FOR_VALIDATION) y confirma evidencia.
+2) Usuario revisa master FRONT.
+3) Usuario responde exactamente:
    - “Acepto el plan maestro FRONT tal cual”
-5) Luego se habilita la ejecución de sprints FRONT ya redactados (iniciando por `SPR-F001`).
+4) Luego se habilita la ejecución de sprints FRONT ya redactados (iniciando por `SPR-F001`).
 
 ## 6) Riesgos/bloqueos actuales
-- `SPR-B001` bloqueado: ausencia de baseline backend y contradicción de API base path (RFC-0004).
 - Si no se acepta master FRONT, no se deben ejecutar sprints FRONT (aunque estén documentados).
 - Cualquier cambio a scoping/agenda/seguridad exige RFC/ADR.
 

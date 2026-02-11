@@ -303,4 +303,28 @@ Formato por entrada:
 - Resultado:
   - BLOCKED (DoR FAIL; ver RFC-0004)
 
+## 2026-02-11T18:00:58-05:00 (America/Guayaquil)
+- Sprint/Tanda: SPR-B001
+- Qué cambió:
+  - Se creó baseline backend (Spring Boot + Maven Wrapper + Flyway).
+  - Se implementó auth/refresh/logout + scoping `/api/v1/me` + Problem Details.
+  - Se agregó OpenAPI/Swagger y smoke script `scripts/smoke/sprint-b001.ps1`.
+  - Se actualizó trazabilidad (status/rtm/state/changelog) y se resolvió RFC-0004.
+- Comandos ejecutados:
+  - git status --porcelain
+  - git config user.name
+  - git config user.email
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
+  - rg --files
+  - .\mvnw.cmd -v (falló: JAVA_HOME no definido)
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - READY_FOR_VALIDATION
+
 <!-- EOF -->

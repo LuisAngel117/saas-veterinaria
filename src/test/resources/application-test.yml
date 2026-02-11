@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: true
+
+app:
+  security:
+    jwt:
+      issuer: test
+      access-ttl: PT1H
+      refresh-ttl: P7D
+      secret: test_secret_test_secret_test_secret_1234
+      refresh-rotate: true
+  scoping:
+    branch:
+      header-name: X-Branch-Id

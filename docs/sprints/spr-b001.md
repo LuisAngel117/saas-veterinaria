@@ -1,5 +1,3 @@
-# PATH: docs/sprints/spr-b001.md
-
 # SPR-B001 — Walking Skeleton BACK: Auth + Branch Scoping + Problem Details + Seeds + Smoke
 
 **Estado:** BLOQUEADO (no editar; cambios solo por RFC/ADR/CHANGELOG)  
@@ -31,18 +29,18 @@ Entregar el **walking skeleton backend** mínimo, ejecutable y verificable en lo
   - `user_branch` (permisos de acceso a sucursal)
   - `refresh_token` persistido (rotación y revocación)
 - Endpoints mínimos:
-  1) `POST /api/auth/login`
-  2) `POST /api/auth/refresh`
-  3) `POST /api/auth/logout`
-  4) `GET /api/me` (**branch-scoped**) para validar scoping.
+  1) `POST /api/v1/auth/login`
+  2) `POST /api/v1/auth/refresh`
+  3) `POST /api/v1/auth/logout`
+  4) `GET /api/v1/me` (**branch-scoped**) para validar scoping.
 - Regla de selección de branch “al iniciar sesión” (sin inventar flujo extra):
-  - `POST /api/auth/login` acepta `branchId` opcional.
+  - `POST /api/v1/auth/login` acepta `branchId` opcional.
   - Si credenciales OK y `branchId` **faltante**:
     - Si usuario tiene **1** branch permitido → emitir tokens con ese branch.
-    - Si usuario tiene **>1** branch permitido → responder **409 Problem Details** (`code=BRANCH_REQUIRED`) incluyendo lista de branches permitidos (id, name) para que UI seleccione y reintente con `branchId`.
+    - Si usuario tiene **>1** branch permitido → responder **409 Problem Details** (`code=BRANCH_REQUIRED`) incluyendo lista de branches permitidas (id, name) para que UI seleccione y reintente con `branchId`.
   - Si credenciales OK y `branchId` presente pero **no permitido** → **403 Problem Details** (`code=BRANCH_FORBIDDEN`).
 - Implementación de scoping:
-  - En endpoints **branch-scoped** (en este sprint: `GET /api/me`):
+  - En endpoints **branch-scoped** (en este sprint: `GET /api/v1/me`):
     - Si falta header `X-Branch-Id` → **400** (`code=BRANCH_HEADER_MISSING`)
     - Si `X-Branch-Id` != `branch_id` del JWT → **403** (`code=BRANCH_SCOPE_MISMATCH`)
 - Problem Details (RFC 7807) como formato único de error para 4xx/5xx del API.
@@ -93,9 +91,9 @@ Si DoR falla (Definition of Ready) → marcar sprint BLOCKED (status/log) y dete
 
 ### Backend (código)
 - Auth JWT access/refresh + refresh rotation + logout (revocación).
-- Scoping branch seguro aplicado a endpoint `GET /api/me`.
+- Scoping branch seguro aplicado a endpoint `GET /api/v1/me`.
 - Problem Details centralizado (handler) + códigos internos.
-- OpenAPI/Swagger para endpoints de auth y `/api/me`.
+- OpenAPI/Swagger para endpoints de auth y `/api/v1/me`.
 - Seeds demo: usuarios/roles/sucursal/esquema mínimo.
 
 ### DB / Migraciones (Flyway)
@@ -185,7 +183,7 @@ Insertar en migración/seeder (según convención del repo):
 ### 5.4 Auth API (BRD-REQ-001 + BRD-REQ-002)
 Implementar endpoints:
 
-#### POST /api/auth/login
+#### POST /api/v1/auth/login
 Request JSON:
 - `email` (string)
 - `password` (string)
@@ -198,7 +196,7 @@ Comportamiento:
 3) Si `branchId` es null:
    - si allowedBranches.size == 1 → usar ese branch y emitir tokens
    - si allowedBranches.size > 1 → 409 Problem Details (`code=BRANCH_REQUIRED`) con propiedad extra:
-     - `branches: [{id, name}, ...]`
+     - `branches: [{id,name}]`
 4) Si `branchId` presente:
    - si no está en allowedBranches → 403 (`code=BRANCH_FORBIDDEN`)
    - si está permitido → emitir tokens con claim `branch_id = branchId`
@@ -208,10 +206,10 @@ Response 200:
 - `refreshToken`
 - `tokenType` = "Bearer"
 - `expiresInSeconds`
-- `user: { id, email, roleCodes: [...], branchId }`
+- `user: { id, email, roleCodes: [...] }`
 - `branches` (opcional, solo si lo necesitas; **no requerido** si ya resolviste branch)
 
-#### POST /api/auth/refresh
+#### POST /api/v1/auth/refresh
 Request JSON:
 - `refreshToken`
 
@@ -224,7 +222,7 @@ Comportamiento:
 Response 200:
 - mismo formato de tokens que login (incluye `branchId` del refresh token).
 
-#### POST /api/auth/logout
+#### POST /api/v1/auth/logout
 Request JSON:
 - `refreshToken`
 Comportamiento:
@@ -240,15 +238,15 @@ Comportamiento:
   - `iat`, `exp`, `iss`
 - Configurar Spring Security:
   - Permitir público:
-    - `/api/auth/**`
+    - `/api/v1/auth/**`
     - `/actuator/health` (si existe)
     - `/v3/api-docs/**`, `/swagger-ui/**`
   - Todo lo demás requiere auth.
 
 ### 5.6 Branch Scoping (BRD-REQ-002)
-Implementar scoping en endpoint branch-scoped `GET /api/me`:
+Implementar scoping en endpoint branch-scoped `GET /api/v1/me`:
 
-#### GET /api/me
+#### GET /api/v1/me
 - Requiere Authorization Bearer (access token)
 - Es **branch-scoped**
 Reglas:
@@ -260,7 +258,7 @@ Reglas:
 
 **Implementación recomendada (cerrada):**
 - Crear un filtro/Interceptor de scoping aplicable SOLO a rutas branch-scoped definidas por allowlist:
-  - Para este sprint, aplicar a `/api/me` solamente (para evitar sobre-alcance).
+  - Para este sprint, aplicar a `/api/v1/me` solamente (para evitar sobre-alcance).
 - Extraer claim `branch_id` del JWT ya parseado.
 - Comparar con header `X-Branch-Id`.
 
@@ -276,14 +274,14 @@ Reglas:
 - Exponer swagger UI.
 - Documentar endpoints implementados con schemas de request/response y ejemplos mínimos.
 - Documentar:
-  - header `X-Branch-Id` requerido en `/api/me`
+  - header `X-Branch-Id` requerido en `/api/v1/me`
   - códigos de respuesta y Problem Details.
 
 ### 5.9 Tests (mínimos)
 Agregar tests de integración (o web tests) para:
 - Login sin branchId con 1 branch → 200 tokens.
 - Login sin branchId con >1 branch (si puedes simular con seed adicional en test) → 409 BRANCH_REQUIRED.
-- `/api/me`:
+- `/api/v1/me`:
   - sin header → 400
   - con header mismatch → 403
   - con header match → 200
@@ -294,7 +292,7 @@ Agregar tests de integración (o web tests) para:
 Crear `scripts/smoke/sprint-b001.ps1` con:
 1) Healthcheck (si existe `/actuator/health`)
 2) Login (recepcion) → obtener tokens
-3) GET `/api/me`:
+3) GET `/api/v1/me`:
    - sin `X-Branch-Id` → esperar 400
    - con `X-Branch-Id` correcto → 200
    - con `X-Branch-Id` incorrecto → 403
@@ -308,19 +306,19 @@ El script debe imprimir claramente OK/FAIL por bloque.
 
 - [ ] Flyway crea tablas mínimas (`branch`, `user_account`, `role`, `user_role`, `user_branch`, `refresh_token`) y el backend arranca con DB limpia.
 - [ ] Seeds demo creados con credenciales exactas (4 usuarios) y al menos 1 branch.
-- [ ] `POST /api/auth/login`:
+- [ ] `POST /api/v1/auth/login`:
   - [ ] 401 `AUTH_INVALID_CREDENTIALS` en credenciales inválidas (Problem Details).
   - [ ] 200 tokens en credenciales válidas y branch resuelto.
   - [ ] 409 `BRANCH_REQUIRED` (Problem Details) si branchId faltante y user tiene >1 branch (si se prueba).
   - [ ] 403 `BRANCH_FORBIDDEN` si branchId no permitido.
-- [ ] `POST /api/auth/refresh` rota refresh token (anterior revocado, nuevo emitido).
-- [ ] `POST /api/auth/logout` revoca refresh token.
-- [ ] `GET /api/me`:
+- [ ] `POST /api/v1/auth/refresh` rota refresh token (anterior revocado, nuevo emitido).
+- [ ] `POST /api/v1/auth/logout` revoca refresh token.
+- [ ] `GET /api/v1/me`:
   - [ ] 400 `BRANCH_HEADER_MISSING` si falta `X-Branch-Id`
   - [ ] 403 `BRANCH_SCOPE_MISMATCH` si no coincide con claim `branch_id`
   - [ ] 200 si coincide
 - [ ] Todos los errores anteriores usan `application/problem+json` con RFC 7807 + propiedad `code`.
-- [ ] Swagger UI disponible y documenta estos endpoints + header `X-Branch-Id` en `/api/me`.
+- [ ] Swagger UI disponible y documenta estos endpoints + header `X-Branch-Id` en `/api/v1/me`.
 - [ ] `scripts/smoke/sprint-b001.ps1` existe y pasa contra backend en ejecución.
 - [ ] `docs/log/log.md` tiene entrada append-only del sprint con placeholders/output.
 - [ ] `docs/status/status.md` tiene fila SPR-B001 en `READY_FOR_VALIDATION` con hash commit.
