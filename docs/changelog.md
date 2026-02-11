@@ -14,5 +14,6 @@
 - DOCS-BACK-SPRINTS-002: completa SPR-B002..SPR-B006 y corrige plantilla en SPR-B007..SPR-B019 y SPR-RC001.
 - DOCS-BACK-SPRINTS-003: eleva detalle documental en SPR-B002..SPR-B019 y SPR-RC001 (alineado a master+BRD, sin implementar features).
 - DOCS-FRONT-SPRINTS-001: crea SPR-F001..SPR-F015 y SPR-RC002 con detalle extendido (alineado a master FRONT + BRD + UX + permisos; estado BLOCKED por master DRAFT).
+- SPR-B001: intento de ejecucion detenido por DoR FAIL (RFC-0004: baseline backend ausente + conflicto `/api` vs `/api/v1`).
 
 <!-- EOF -->

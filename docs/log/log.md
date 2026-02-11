@@ -281,4 +281,26 @@ Formato por entrada:
 - Resultado:
   - READY_FOR_VALIDATION
 
+## 2026-02-11T17:44:35-05:00 (America/Guayaquil)
+- Sprint/Tanda: SPR-B001
+- Qué cambió:
+  - Se ejecutó pre-check y lectura obligatoria para iniciar `SPR-B001`.
+  - Se evaluó Gate DoR y se detectaron bloqueos.
+  - Se creó RFC-0004 para registrar bloqueos y plan de desbloqueo.
+  - Se actualizó status/rtm/state/changelog dejando `SPR-B001` en `BLOCKED`.
+- Comandos ejecutados:
+  - git status --porcelain
+  - git config user.name
+  - git config user.email
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
+  - rg --files
+  - Test-Path de baseline backend (`pom.xml`, `mvnw`, `mvnw.cmd`, `backend/`, `apps/backend/`, `services/backend/`)
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - BLOCKED (DoR FAIL; ver RFC-0004)
+
 <!-- EOF -->

@@ -4,8 +4,8 @@ Regla: todo `BRD-REQ-###` debe mapear a sprint(s) o quedar RFC/BLOCKED.
 
 | BRD-REQ | Descripción | Sprint(s) | Evidencia (commit) | Verificación | Estado | Notas |
 |---|---|---|---|---|---|---|
-| BRD-REQ-001 | Auth login/refresh/logout | SPR-B001, SPR-F001 | TBD | smoke + manual | NOT_STARTED |  |
-| BRD-REQ-002 | Branch selection + scoping claim/header | SPR-B001, SPR-F001 | TBD | smoke | NOT_STARTED |  |
+| BRD-REQ-001 | Auth login/refresh/logout | SPR-B001, SPR-F001 | TBD | smoke + manual | BLOCKED | SPR-B001 bloqueado por DoR (RFC-0004) |
+| BRD-REQ-002 | Branch selection + scoping claim/header | SPR-B001, SPR-F001 | TBD | smoke | BLOCKED | SPR-B001 bloqueado por DoR (RFC-0004) |
 | BRD-REQ-003 | Roles/permisos por acción | SPR-B002, SPR-F002 | TBD | tests + manual | NOT_STARTED |  |
 | BRD-REQ-004 | 2FA TOTP admin | SPR-B003 | TBD | manual | NOT_STARTED |  |
 | BRD-REQ-005 | Auditoría before/after | SPR-B004 | TBD | manual | NOT_STARTED |  |
@@ -23,9 +23,9 @@ Regla: todo `BRD-REQ-###` debe mapear a sprint(s) o quedar RFC/BLOCKED.
 | BRD-REQ-017 | Facturación + IVA + descuentos + pagos | SPR-B016, SPR-F012 | TBD | manual | NOT_STARTED |  |
 | BRD-REQ-018 | Anulación + export factura | SPR-B017, SPR-F013 | TBD | manual | NOT_STARTED |  |
 | BRD-REQ-019 | Runbook + scripts verdad + smoke | SPR-B001..RC001; SPR-F001..RC002 | TBD | smoke | NOT_STARTED |  |
-| BRD-REQ-020 | Seeds/demo 2–3 min | SPR-B001 (+ seeds en varios) | TBD | manual | NOT_STARTED |  |
-| BRD-REQ-021 | OpenAPI/Swagger | SPR-B001 + mantenimiento | TBD | manual | NOT_STARTED |  |
-| BRD-REQ-022 | Errores RFC7807 Problem Details | SPR-B001 + estándar | TBD | tests | NOT_STARTED |  |
+| BRD-REQ-020 | Seeds/demo 2–3 min | SPR-B001 (+ seeds en varios) | TBD | manual | BLOCKED | SPR-B001 bloqueado por DoR (RFC-0004) |
+| BRD-REQ-021 | OpenAPI/Swagger | SPR-B001 + mantenimiento | TBD | manual | BLOCKED | SPR-B001 bloqueado por DoR (RFC-0004) |
+| BRD-REQ-022 | Errores RFC7807 Problem Details | SPR-B001 + estándar | TBD | tests | BLOCKED | SPR-B001 bloqueado por DoR (RFC-0004) |
 | BRD-REQ-023 | Reportes mínimos + export | SPR-B018, SPR-F014 | TBD | manual | NOT_STARTED |  |
 | BRD-REQ-024 | Dashboard por rol | SPR-F014 | TBD | manual | NOT_STARTED |  |
 | BRD-REQ-025 | UX vendible (roles, validaciones, mensajes) | SPR-F001..F015 | TBD | manual | NOT_STARTED |  |
