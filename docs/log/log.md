@@ -133,4 +133,18 @@ Formato por entrada:
 - Resultado:
   - READY_FOR_VALIDATION
 
+## 2026-02-11T09:30:00-05:00 (America/Guayaquil)
+- Sprint/Tanda: DOCS: SPR-B001 creado
+- Qué cambió:
+  - Se creó/especificó `docs/sprints/spr-b001.md` (walking skeleton auth+scoping).
+  - Se actualizó `docs/status/status.md` con fila SPR-B001 en NOT_STARTED.
+  - Se actualizó `docs/changelog.md` en Unreleased.
+- Comandos ejecutados:
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - READY_FOR_VALIDATION
+
 <!-- EOF -->

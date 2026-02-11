@@ -12,5 +12,6 @@ Regla: DONE solo tras validación local del usuario con evidencia en `docs/log/l
 | AUDIT-BACK-001 | Resumen técnico + auditoría de huecos/inconsistencias plan maestro BACK | READY_FOR_VALIDATION | 2f8bd240eb75ba4d4a73baa796ee2f8bfafca4ee | Documento: docs/state/audit-back-master-001.md |
 | AUDIT-FRONT-001 | Resumen técnico + auditoría de huecos/inconsistencias plan maestro FRONT | READY_FOR_VALIDATION | 601268f57c08d7e6bb2fad07780c31770903b1c7 | Documento: docs/state/audit-front-master-001.md |
 | T5 | RFC normalizaciones (estados + project-lock) + aceptación master BACK | READY_FOR_VALIDATION | 8f266c314753043d603e7a4c7513358ee18cc4d7 | RFC-0002/RFC-0003 + lock canónico + master BACK ACCEPTED |
+| SPR-B001 | Walking Skeleton Backend: Auth + Branch Scoping + Seeds + OpenAPI + Problem Details | NOT_STARTED |  | BRD-REQ-001,002,020,021,022 |
 
 <!-- EOF -->

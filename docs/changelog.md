@@ -8,5 +8,6 @@
 - AUDIT-BACK-001: resumen tecnico completo + auditoria de huecos/inconsistencias del plan maestro BACK.
 - AUDIT-FRONT-001: resumen tecnico completo + auditoria de huecos/inconsistencias del plan maestro FRONT.
 - T5: RFC-0002/RFC-0003 + normalizacion de estados (IN_ATTENTION/ANNULLED) + project-lock canonico en docs/project-lock.md + aceptacion master BACK.
+- DOCS: agrega SPR-B001 (walking skeleton auth+scoping).
 
 <!-- EOF -->
