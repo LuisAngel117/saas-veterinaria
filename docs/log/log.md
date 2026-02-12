@@ -510,4 +510,22 @@ Formato por entrada:
 - Resultado:
   - RFC en DRAFT
 
+## 2026-02-11T21:36:30-05:00 (America/Guayaquil)
+- Sprint/Tanda: RFC-0007
+- Qué cambió:
+  - Se propuso contrato de endpoints/payloads para appointments (agenda core).
+  - Se definieron reglas de no-solape y override con reason+auditoria.
+- Comandos ejecutados:
+  - git status --porcelain
+  - git config user.name
+  - git config user.email
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - RFC en DRAFT
+
 <!-- EOF -->
