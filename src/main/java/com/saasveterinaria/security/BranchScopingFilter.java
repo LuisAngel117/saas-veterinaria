@@ -1,7 +1,7 @@
 package com.saasveterinaria.security;
 
-import com.saasveterinaria.common.ApiException;
 import com.saasveterinaria.common.ErrorCodes;
+import com.saasveterinaria.common.ProblemDetailsWriter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,10 +18,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class BranchScopingFilter extends OncePerRequestFilter {
   private final ScopingProperties scopingProperties;
+  private final ProblemDetailsWriter problemDetailsWriter;
   private final AntPathRequestMatcher matcher = new AntPathRequestMatcher("/api/v1/me", "GET");
 
-  public BranchScopingFilter(ScopingProperties scopingProperties) {
+  public BranchScopingFilter(ScopingProperties scopingProperties, ProblemDetailsWriter problemDetailsWriter) {
     this.scopingProperties = scopingProperties;
+    this.problemDetailsWriter = problemDetailsWriter;
   }
 
   @Override
@@ -35,16 +37,18 @@ public class BranchScopingFilter extends OncePerRequestFilter {
     String headerName = scopingProperties.getHeaderName();
     String headerValue = request.getHeader(headerName);
     if (headerValue == null || headerValue.isBlank()) {
-      throw new ApiException(HttpStatus.BAD_REQUEST, ErrorCodes.BRANCH_HEADER_MISSING,
-          "Missing required header: " + headerName);
+      problemDetailsWriter.write(response, HttpStatus.BAD_REQUEST, ErrorCodes.BRANCH_HEADER_MISSING,
+          "Missing required header: " + headerName, request.getRequestURI());
+      return;
     }
 
     UUID headerBranchId;
     try {
       headerBranchId = UUID.fromString(headerValue);
     } catch (IllegalArgumentException ex) {
-      throw new ApiException(HttpStatus.BAD_REQUEST, ErrorCodes.BRANCH_HEADER_INVALID,
-          "Invalid branch header value");
+      problemDetailsWriter.write(response, HttpStatus.BAD_REQUEST, ErrorCodes.BRANCH_HEADER_INVALID,
+          "Invalid branch header value", request.getRequestURI());
+      return;
     }
 
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -54,8 +58,9 @@ public class BranchScopingFilter extends OncePerRequestFilter {
     }
 
     if (!headerBranchId.equals(principal.branchId())) {
-      throw new ApiException(HttpStatus.FORBIDDEN, ErrorCodes.BRANCH_SCOPE_MISMATCH,
-          "Branch scope mismatch");
+      problemDetailsWriter.write(response, HttpStatus.FORBIDDEN, ErrorCodes.BRANCH_SCOPE_MISMATCH,
+          "Branch scope mismatch", request.getRequestURI());
+      return;
     }
 
     filterChain.doFilter(request, response);

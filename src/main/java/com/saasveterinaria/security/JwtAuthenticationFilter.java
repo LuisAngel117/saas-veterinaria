@@ -2,12 +2,15 @@ package com.saasveterinaria.security;
 
 import com.saasveterinaria.common.ErrorCodes;
 import com.saasveterinaria.common.ProblemDetailsWriter;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,6 +21,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+  private static final Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
   private final JwtService jwtService;
   private final ProblemDetailsWriter problemDetailsWriter;
 
@@ -36,18 +40,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     String token = header.substring("Bearer ".length());
+    JwtPrincipal principal;
     try {
-      JwtPrincipal principal = jwtService.parseAccessToken(token);
-      List<SimpleGrantedAuthority> authorities = principal.roles().stream()
-          .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-          .toList();
-      UsernamePasswordAuthenticationToken authentication =
-          new UsernamePasswordAuthenticationToken(principal, null, authorities);
-      SecurityContextHolder.getContext().setAuthentication(authentication);
-      filterChain.doFilter(request, response);
-    } catch (Exception ex) {
+      principal = jwtService.parseAccessToken(token);
+    } catch (JwtException | IllegalArgumentException ex) {
+      log.warn("Invalid access token", ex);
       problemDetailsWriter.write(response, HttpStatus.UNAUTHORIZED, ErrorCodes.AUTH_INVALID_TOKEN,
           "Invalid access token", request.getRequestURI());
+      return;
     }
+
+    List<SimpleGrantedAuthority> authorities = principal.roles().stream()
+        .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+        .toList();
+    UsernamePasswordAuthenticationToken authentication =
+        new UsernamePasswordAuthenticationToken(principal, null, authorities);
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+    filterChain.doFilter(request, response);
   }
 }
