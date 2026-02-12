@@ -1,7 +1,6 @@
 package com.saasveterinaria.auth;
 
-import com.saasveterinaria.audit.AuditEvent;
-import com.saasveterinaria.audit.AuditEventRepository;
+import com.saasveterinaria.audit.AuditService;
 import com.saasveterinaria.branch.Branch;
 import com.saasveterinaria.branch.BranchRepository;
 import com.saasveterinaria.common.ApiException;
@@ -9,7 +8,6 @@ import com.saasveterinaria.common.ErrorCodes;
 import com.saasveterinaria.security.JwtPrincipal;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Map;
 import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,18 +20,18 @@ public class TwoFactorService {
   private final TwoFactorChallengeRepository challengeRepository;
   private final BranchRepository branchRepository;
   private final TotpService totpService;
-  private final AuditEventRepository auditEventRepository;
+  private final AuditService auditService;
 
   public TwoFactorService(UserAccountRepository userRepository,
                           TwoFactorChallengeRepository challengeRepository,
                           BranchRepository branchRepository,
                           TotpService totpService,
-                          AuditEventRepository auditEventRepository) {
+                          AuditService auditService) {
     this.userRepository = userRepository;
     this.challengeRepository = challengeRepository;
     this.branchRepository = branchRepository;
     this.totpService = totpService;
-    this.auditEventRepository = auditEventRepository;
+    this.auditService = auditService;
   }
 
   @Transactional
@@ -125,48 +123,23 @@ public class TwoFactorService {
       throw new ApiException(HttpStatus.CONFLICT, ErrorCodes.AUTH_2FA_NOT_ENABLED, "2FA not enabled");
     }
 
-    String before = toJson(Map.of("totp_enabled", true));
+    String actorRole = String.join(",", actor.roles());
     target.setTotpEnabled(false);
     target.setTotpSecret(null);
     target.setTotpVerifiedAt(null);
     userRepository.save(target);
-    String after = toJson(Map.of("totp_enabled", false));
-
-    AuditEvent event = new AuditEvent();
-    event.setId(UUID.randomUUID());
-    event.setOccurredAt(Instant.now());
-    event.setActorUserId(actor.userId());
-    event.setActorRole(String.join(",", actor.roles()));
-    event.setBranchId(null);
-    event.setActionCode(PermissionCodes.AUTH_2FA_RESET);
-    event.setEntityType("user_account");
-    event.setEntityId(target.getId());
-    event.setReason(reason);
-    event.setBeforeJson(before);
-    event.setAfterJson(after);
-    event.setIpAddress(ipAddress);
-    event.setUserAgent(userAgent);
-    auditEventRepository.save(event);
-  }
-
-  private String toJson(Map<String, Object> values) {
-    StringBuilder builder = new StringBuilder("{");
-    boolean first = true;
-    for (Map.Entry<String, Object> entry : values.entrySet()) {
-      if (!first) {
-        builder.append(',');
-      }
-      builder.append('"').append(entry.getKey()).append('"').append(':');
-      Object value = entry.getValue();
-      if (value instanceof String) {
-        builder.append('"').append(value).append('"');
-      } else {
-        builder.append(String.valueOf(value));
-      }
-      first = false;
-    }
-    builder.append('}');
-    return builder.toString();
+    auditService.record(
+        actor.userId(),
+        actorRole,
+        actor.branchId(),
+        PermissionCodes.AUTH_2FA_RESET,
+        "user_account",
+        target.getId(),
+        reason,
+        java.util.Map.of("totp_enabled", true),
+        java.util.Map.of("totp_enabled", false),
+        ipAddress,
+        userAgent);
   }
 
   public record EnrollResponse(String secret, String otpauthUrl) {}
