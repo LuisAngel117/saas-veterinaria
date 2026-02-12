@@ -28,7 +28,7 @@ Referencia: `docs/status/status.md`
 - SPR-B002: ejecutado y en READY_FOR_VALIDATION (RBAC base; ver status/rtm/log).
 - SPR-B003: ejecutado y en READY_FOR_VALIDATION (2FA TOTP; RFC-0005 ACCEPTED).
 - SPR-B004: ejecutado y en READY_FOR_VALIDATION (framework de auditoria + reason enforcement).
-- SPR-B005: BLOCKED (faltan contratos de endpoints/payloads rooms/vet_profile; permisos ROOM/VET no definidos).
+- SPR-B005: BLOCKED (RFC-0006 propuesto para contrato rooms/vet_profile y permisos ROOM/VET).
 - SPR-B006: BLOCKED (faltan contratos de endpoints/payloads appointment; depende de SPR-B005).
 - Masters:
   - `docs/sprints/spr-master-back.md` = ACCEPTED
@@ -48,7 +48,7 @@ Referencia: `docs/status/status.md`
 - Cualquier cambio a scoping/agenda/seguridad exige RFC/ADR.
 - 2FA TOTP: contrato definido en RFC-0005; pendiente validacion local del usuario.
 - Auditoria: framework base implementado; pendiente validacion local del usuario.
-- Config operativa (SPR-B005): requiere RFC para definir endpoints y permisos.
+- Config operativa (SPR-B005): RFC-0006 propone endpoints + permisos; requiere aprobacion.
 - Agenda core (SPR-B006): requiere RFC para contrato de appointment y desbloquear SPR-B005.
 
 <!-- EOF -->

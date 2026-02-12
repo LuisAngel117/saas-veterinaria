@@ -492,4 +492,22 @@ Formato por entrada:
 - Resultado:
   - BLOCKED
 
+## 2026-02-11T21:33:53-05:00 (America/Guayaquil)
+- Sprint/Tanda: RFC-0006
+- Qué cambió:
+  - Se propuso contrato de endpoints/payloads para rooms y veterinarian_profile.
+  - Se propusieron permisos ROOM_* y VET_PROFILE_*.
+- Comandos ejecutados:
+  - git status --porcelain
+  - git config user.name
+  - git config user.email
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - RFC en DRAFT
+
 <!-- EOF -->
