@@ -5,7 +5,6 @@ import com.saasveterinaria.common.ApiException;
 import com.saasveterinaria.common.ErrorCodes;
 import com.saasveterinaria.security.JwtProperties;
 import com.saasveterinaria.security.JwtService;
-import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.http.HttpStatus;
@@ -19,17 +18,20 @@ public class AuthService {
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final JwtProperties jwtProperties;
+  private final TwoFactorService twoFactorService;
 
   public AuthService(UserAccountRepository userRepository,
                      RefreshTokenService refreshTokenService,
                      PasswordEncoder passwordEncoder,
                      JwtService jwtService,
-                     JwtProperties jwtProperties) {
+                     JwtProperties jwtProperties,
+                     TwoFactorService twoFactorService) {
     this.userRepository = userRepository;
     this.refreshTokenService = refreshTokenService;
     this.passwordEncoder = passwordEncoder;
     this.jwtService = jwtService;
     this.jwtProperties = jwtProperties;
+    this.twoFactorService = twoFactorService;
   }
 
   public LoginResponse login(LoginRequest request) {
@@ -47,22 +49,15 @@ public class AuthService {
     }
 
     UUID selectedBranch = resolveBranch(request.getBranchId(), branches);
+    if (requiresTwoFactor(user)) {
+      UUID challengeId = twoFactorService.createChallenge(user, selectedBranch).getId();
+      ApiException ex = new ApiException(HttpStatus.CONFLICT, ErrorCodes.AUTH_2FA_REQUIRED,
+          "Two-factor authentication required");
+      ex.withProperty("challengeId", challengeId.toString());
+      throw ex;
+    }
 
-    List<String> roleCodes = user.getRoles().stream().map(Role::getCode).toList();
-    List<String> permissionCodes = resolvePermissions(user);
-    String accessToken = jwtService.generateAccessToken(
-        user.getId(), user.getEmail(), roleCodes, permissionCodes, selectedBranch);
-
-    RefreshTokenService.IssuedToken issued = refreshTokenService.issueToken(user, selectedBranch);
-
-    LoginResponse response = new LoginResponse();
-    response.setAccessToken(accessToken);
-    response.setRefreshToken(issued.plainToken());
-    response.setTokenType("Bearer");
-    response.setExpiresInSeconds(jwtProperties.getAccessTtl().getSeconds());
-    response.setBranchId(selectedBranch.toString());
-    response.setUser(new LoginResponse.UserInfo(user.getId().toString(), user.getEmail(), roleCodes));
-    return response;
+    return issueTokens(user, selectedBranch);
   }
 
   public LoginResponse refresh(RefreshRequest request) {
@@ -71,20 +66,7 @@ public class AuthService {
         .orElseThrow(() -> new ApiException(HttpStatus.UNAUTHORIZED,
             ErrorCodes.AUTH_REFRESH_INVALID, "Invalid refresh token"));
     UUID branchId = rotated.token().getBranch().getId();
-
-    List<String> roleCodes = user.getRoles().stream().map(Role::getCode).toList();
-    List<String> permissionCodes = resolvePermissions(user);
-    String accessToken = jwtService.generateAccessToken(
-        user.getId(), user.getEmail(), roleCodes, permissionCodes, branchId);
-
-    LoginResponse response = new LoginResponse();
-    response.setAccessToken(accessToken);
-    response.setRefreshToken(rotated.plainToken());
-    response.setTokenType("Bearer");
-    response.setExpiresInSeconds(jwtProperties.getAccessTtl().getSeconds());
-    response.setBranchId(branchId.toString());
-    response.setUser(new LoginResponse.UserInfo(user.getId().toString(), user.getEmail(), roleCodes));
-    return response;
+    return issueTokens(user, branchId, rotated.plainToken());
   }
 
   public void logout(LogoutRequest request) {
@@ -126,5 +108,33 @@ public class AuthService {
         .distinct()
         .sorted()
         .toList();
+  }
+
+  public LoginResponse issueTokens(UserAccount user, UUID branchId) {
+    RefreshTokenService.IssuedToken issued = refreshTokenService.issueToken(user, branchId);
+    return issueTokens(user, branchId, issued.plainToken());
+  }
+
+  public LoginResponse issueTokens(UserAccount user, UUID branchId, String refreshToken) {
+    List<String> roleCodes = user.getRoles().stream().map(Role::getCode).toList();
+    List<String> permissionCodes = resolvePermissions(user);
+    String accessToken = jwtService.generateAccessToken(
+        user.getId(), user.getEmail(), roleCodes, permissionCodes, branchId);
+
+    LoginResponse response = new LoginResponse();
+    response.setAccessToken(accessToken);
+    response.setRefreshToken(refreshToken);
+    response.setTokenType("Bearer");
+    response.setExpiresInSeconds(jwtProperties.getAccessTtl().getSeconds());
+    response.setBranchId(branchId.toString());
+    response.setUser(new LoginResponse.UserInfo(user.getId().toString(), user.getEmail(), roleCodes));
+    return response;
+  }
+
+  private boolean requiresTwoFactor(UserAccount user) {
+    boolean adminRole = user.getRoles().stream()
+        .map(Role::getCode)
+        .anyMatch(code -> "ADMIN".equals(code) || "SUPERADMIN".equals(code));
+    return adminRole && user.isTotpEnabled();
   }
 }

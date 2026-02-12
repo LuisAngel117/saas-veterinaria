@@ -33,6 +33,15 @@ public class UserAccount {
   @Column(name = "created_at", nullable = false)
   private Instant createdAt;
 
+  @Column(name = "totp_enabled", nullable = false)
+  private boolean totpEnabled;
+
+  @Column(name = "totp_secret")
+  private String totpSecret;
+
+  @Column(name = "totp_verified_at")
+  private Instant totpVerifiedAt;
+
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "user_role",
@@ -85,6 +94,30 @@ public class UserAccount {
 
   public void setCreatedAt(Instant createdAt) {
     this.createdAt = createdAt;
+  }
+
+  public boolean isTotpEnabled() {
+    return totpEnabled;
+  }
+
+  public void setTotpEnabled(boolean totpEnabled) {
+    this.totpEnabled = totpEnabled;
+  }
+
+  public String getTotpSecret() {
+    return totpSecret;
+  }
+
+  public void setTotpSecret(String totpSecret) {
+    this.totpSecret = totpSecret;
+  }
+
+  public Instant getTotpVerifiedAt() {
+    return totpVerifiedAt;
+  }
+
+  public void setTotpVerifiedAt(Instant totpVerifiedAt) {
+    this.totpVerifiedAt = totpVerifiedAt;
   }
 
   public Set<Role> getRoles() {
