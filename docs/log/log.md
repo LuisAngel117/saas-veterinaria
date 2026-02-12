@@ -374,4 +374,24 @@ Formato por entrada:
 - Resultado:
   - READY_FOR_VALIDATION
 
+## 2026-02-11T20:11:04-05:00 (America/Guayaquil)
+- Sprint/Tanda: SPR-B003
+- Qué cambió:
+  - DoR falló por contrato 2FA incompleto (endpoints/payloads/challenge/auditoria).
+  - Se creó RFC-0005 para definir contrato 2FA TOTP.
+  - Se actualizó status/rtm/state para marcar bloqueo.
+- Comandos ejecutados:
+  - git status --porcelain
+  - git config user.name
+  - git config user.email
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
+  - lectura obligatoria de docs (segun sprint)
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - BLOCKED (ver RFC-0005)
+
 <!-- EOF -->

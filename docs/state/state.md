@@ -26,6 +26,7 @@ Referencia: `docs/status/status.md`
 - SPR-B001: ejecutado y en READY_FOR_VALIDATION (ver status/rtm/log).
 - 2026-02-11: SPR-B001 revalidado con correcciones en filtros de scoping/JWT y tests OK.
 - SPR-B002: ejecutado y en READY_FOR_VALIDATION (RBAC base; ver status/rtm/log).
+- SPR-B003: BLOCKED por contrato 2FA incompleto (RFC-0005).
 - Masters:
   - `docs/sprints/spr-master-back.md` = ACCEPTED
   - `docs/sprints/spr-master-front.md` = DRAFT
@@ -42,5 +43,6 @@ Referencia: `docs/status/status.md`
 ## 6) Riesgos/bloqueos actuales
 - Si no se acepta master FRONT, no se deben ejecutar sprints FRONT (aunque estén documentados).
 - Cualquier cambio a scoping/agenda/seguridad exige RFC/ADR.
+- 2FA TOTP requiere definir contrato (endpoints/payloads/challenge/auditoria) antes de SPR-B003 (RFC-0005).
 
 <!-- EOF -->

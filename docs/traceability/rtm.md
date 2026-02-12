@@ -7,7 +7,7 @@ Regla: todo `BRD-REQ-###` debe mapear a sprint(s) o quedar RFC/BLOCKED.
 | BRD-REQ-001 | Auth login/refresh/logout | SPR-B001, SPR-F001 | e13a559bb19290859047da4ed647fd6b00f29b68 | smoke + manual | READY_FOR_VALIDATION | Implementado en SPR-B001 |
 | BRD-REQ-002 | Branch selection + scoping claim/header | SPR-B001, SPR-F001 | e13a559bb19290859047da4ed647fd6b00f29b68 | smoke | READY_FOR_VALIDATION | Implementado en SPR-B001 |
 | BRD-REQ-003 | Roles/permisos por acción | SPR-B002, SPR-F002 | ddb0194be186b8c827a6510bc1475944aeb790d7 | tests + manual | READY_FOR_VALIDATION | Implementado en SPR-B002 |
-| BRD-REQ-004 | 2FA TOTP admin | SPR-B003 | TBD | manual | NOT_STARTED |  |
+| BRD-REQ-004 | 2FA TOTP admin | SPR-B003 | TBD | manual | BLOCKED | RFC-0005 (contrato 2FA pendiente) |
 | BRD-REQ-005 | Auditoría before/after | SPR-B004 | TBD | manual | NOT_STARTED |  |
 | BRD-REQ-006 | Branch/rooms/vets config | SPR-B005 | TBD | manual | NOT_STARTED |  |
 | BRD-REQ-007 | Agenda CRUD + semana + no-solape sala+vet | SPR-B006, SPR-F003 | TBD | smoke + manual | NOT_STARTED |  |
