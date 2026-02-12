@@ -351,4 +351,27 @@ Formato por entrada:
 - Resultado:
   - READY_FOR_VALIDATION
 
+## 2026-02-11T20:00:31-05:00 (America/Guayaquil)
+- Sprint/Tanda: SPR-B002
+- Qué cambió:
+  - Se agregó modelo de permisos y relación role-permission.
+  - Se generó migración Flyway para permisos.
+  - Se sembraron permisos y asignaciones por rol v1.
+  - Se emitieron permissions en JWT y se exigió `PERM_BRANCH_VIEW` en `/api/v1/me`.
+  - Se re-ejecutaron tests del sprint y pasaron.
+- Comandos ejecutados:
+  - git status --porcelain
+  - git config user.name
+  - git config user.email
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
+  - lectura obligatoria de docs (según sprint)
+  - cmd /c "set JAVA_HOME=C:\Program Files\Java\jdk-21.0.10&& .\mvnw.cmd test"
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - READY_FOR_VALIDATION
+
 <!-- EOF -->
