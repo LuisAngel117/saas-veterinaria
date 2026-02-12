@@ -37,7 +37,16 @@ public class SecurityConfig {
         .accessDeniedHandler(accessDeniedHandler));
 
     http.authorizeHttpRequests(auth -> auth
-        .requestMatchers("/api/v1/auth/**").permitAll()
+        .requestMatchers(
+            "/api/v1/auth/login",
+            "/api/v1/auth/refresh",
+            "/api/v1/auth/logout",
+            "/api/v1/auth/2fa/verify")
+        .permitAll()
+        .requestMatchers("/api/v1/auth/2fa/enroll", "/api/v1/auth/2fa/confirm")
+        .hasAuthority("PERM_AUTH_2FA_ENROLL")
+        .requestMatchers("/api/v1/auth/2fa/reset")
+        .hasAuthority("PERM_AUTH_2FA_RESET")
         .requestMatchers("/actuator/health").permitAll()
         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
         .requestMatchers(HttpMethod.GET, "/api/v1/me").hasAuthority("PERM_BRANCH_VIEW")

@@ -39,7 +39,7 @@ public class TotpService {
       return false;
     }
     String normalized = code.trim();
-    if (!normalized.matches("\\\\d{6}")) {
+    if (!normalized.matches("\\d{6}")) {
       return false;
     }
     long timeStep = now.getEpochSecond() / PERIOD_SECONDS;
