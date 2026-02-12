@@ -454,4 +454,23 @@ Formato por entrada:
 - Resultado:
   - READY_FOR_VALIDATION
 
+## 2026-02-11T21:15:01-05:00 (America/Guayaquil)
+- Sprint/Tanda: SPR-B005
+- Qué cambió:
+  - DoR FAIL: faltan contratos de endpoints/payloads para rooms/vet_profile.
+  - Permisos ROOM/VET no definidos en docs; se requiere RFC antes de implementar.
+- Comandos ejecutados:
+  - git status --porcelain
+  - git config user.name
+  - git config user.email
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
+  - rg -n "room|rooms|veterinarian_profile|vet profile|veterinarian" docs
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - BLOCKED
+
 <!-- EOF -->

@@ -16,7 +16,7 @@ Regla: DONE solo tras validación local del usuario con evidencia en `docs/log/l
 | SPR-B002 | RBAC base (roles/permisos por accion) | READY_FOR_VALIDATION | ddb0194be186b8c827a6510bc1475944aeb790d7 | BRD-REQ-003 |
 | SPR-B003 | 2FA TOTP (ADMIN/SUPERADMIN) | READY_FOR_VALIDATION | 64b2de13ac8933c6057f91dafe6d9cf85387cabc | RFC-0005 ACCEPTED + 2FA implementado; revalidacion tests commit cae5ed80c8a58f36d03833fce8252361e566fc0a |
 | SPR-B004 | Auditoria framework (eventos + before/after en sensibles) | READY_FOR_VALIDATION | 963b705d08d8b70feb6eef6c0af9b51d50cba30a | BRD-REQ-005 |
-| SPR-B005 | Config operativa (branches/rooms/vets profiles) | NOT_STARTED |  | BRD-REQ-006 |
+| SPR-B005 | Config operativa (branches/rooms/vets profiles) | BLOCKED |  | DoR FAIL: faltan contratos de endpoints/payloads para rooms/vet_profile; permisos ROOM/VET no definidos (RFC requerido) |
 | SPR-B006 | Agenda core (CRUD citas + no-solape sala+vet + override) | NOT_STARTED |  | BRD-REQ-007 |
 | SPR-B007 | Workflow de cita (transiciones + check-in separado) | NOT_STARTED |  | BRD-REQ-008 (completa BRD-REQ-007) |
 | SPR-B008 | CRM clientes + consentimientos | NOT_STARTED |  | BRD-REQ-009 |
