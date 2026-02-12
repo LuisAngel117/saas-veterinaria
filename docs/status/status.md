@@ -15,7 +15,7 @@ Regla: DONE solo tras validación local del usuario con evidencia en `docs/log/l
 | SPR-B001 | Walking Skeleton Backend: Auth + Branch Scoping + Seeds + OpenAPI + Problem Details | READY_FOR_VALIDATION | e13a559bb19290859047da4ed647fd6b00f29b68 | Implementado; ver RFC-0004 (resuelto) |
 | SPR-B002 | RBAC base (roles/permisos por accion) | READY_FOR_VALIDATION | ddb0194be186b8c827a6510bc1475944aeb790d7 | BRD-REQ-003 |
 | SPR-B003 | 2FA TOTP (ADMIN/SUPERADMIN) | READY_FOR_VALIDATION | 64b2de13ac8933c6057f91dafe6d9cf85387cabc | RFC-0005 ACCEPTED + 2FA implementado; revalidacion tests commit cae5ed80c8a58f36d03833fce8252361e566fc0a |
-| SPR-B004 | Auditoria framework (eventos + before/after en sensibles) | NOT_STARTED |  | BRD-REQ-005 |
+| SPR-B004 | Auditoria framework (eventos + before/after en sensibles) | READY_FOR_VALIDATION | 963b705d08d8b70feb6eef6c0af9b51d50cba30a | BRD-REQ-005 |
 | SPR-B005 | Config operativa (branches/rooms/vets profiles) | NOT_STARTED |  | BRD-REQ-006 |
 | SPR-B006 | Agenda core (CRUD citas + no-solape sala+vet + override) | NOT_STARTED |  | BRD-REQ-007 |
 | SPR-B007 | Workflow de cita (transiciones + check-in separado) | NOT_STARTED |  | BRD-REQ-008 (completa BRD-REQ-007) |

@@ -27,6 +27,7 @@ Referencia: `docs/status/status.md`
 - 2026-02-11: SPR-B001 revalidado con correcciones en filtros de scoping/JWT y tests OK.
 - SPR-B002: ejecutado y en READY_FOR_VALIDATION (RBAC base; ver status/rtm/log).
 - SPR-B003: ejecutado y en READY_FOR_VALIDATION (2FA TOTP; RFC-0005 ACCEPTED).
+- SPR-B004: ejecutado y en READY_FOR_VALIDATION (framework de auditoria + reason enforcement).
 - Masters:
   - `docs/sprints/spr-master-back.md` = ACCEPTED
   - `docs/sprints/spr-master-front.md` = DRAFT
@@ -44,5 +45,6 @@ Referencia: `docs/status/status.md`
 - Si no se acepta master FRONT, no se deben ejecutar sprints FRONT (aunque estén documentados).
 - Cualquier cambio a scoping/agenda/seguridad exige RFC/ADR.
 - 2FA TOTP: contrato definido en RFC-0005; pendiente validacion local del usuario.
+- Auditoria: framework base implementado; pendiente validacion local del usuario.
 
 <!-- EOF -->
