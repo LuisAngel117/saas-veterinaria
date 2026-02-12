@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/saas_veterinaria}
+    username: ${DB_USER:saas_veterinaria}
+    password: ${DB_PASSWORD:saas_veterinaria}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+server:
+  port: ${PORT:8080}
+
+app:
+  security:
+    jwt:
+      issuer: ${JWT_ISSUER:saas-veterinaria}
+      access-ttl: ${JWT_ACCESS_TTL:PT1H}
+      refresh-ttl: ${JWT_REFRESH_TTL:P7D}
+      secret: ${JWT_SECRET:CHANGE_ME_CHANGE_ME_CHANGE_ME_CHANGE_ME}
+      refresh-rotate: true
+  scoping:
+    branch:
+      header-name: ${BRANCH_HEADER_NAME:X-Branch-Id}
