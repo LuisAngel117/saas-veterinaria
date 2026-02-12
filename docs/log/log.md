@@ -473,4 +473,23 @@ Formato por entrada:
 - Resultado:
   - BLOCKED
 
+## 2026-02-11T21:23:18-05:00 (America/Guayaquil)
+- Sprint/Tanda: SPR-B006
+- Qué cambió:
+  - DoR FAIL: faltan contratos de endpoints/payloads para appointment (CRUD + no-solape + override).
+  - Dependencia SPR-B005 sigue BLOCKED (rooms/vet_profile sin contrato).
+- Comandos ejecutados:
+  - git status --porcelain
+  - git config user.name
+  - git config user.email
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
+  - rg -n "appointment|agenda|room|veterinarian_profile|client|pet" src/main/java
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - BLOCKED
+
 <!-- EOF -->
