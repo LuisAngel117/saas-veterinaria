@@ -39,4 +39,4 @@ fi
 WRAPPER_JAR="$BASE_DIR/.mvn/wrapper/maven-wrapper.jar"
 WRAPPER_PROPERTIES="$BASE_DIR/.mvn/wrapper/maven-wrapper.properties"
 
-exec "$JAVA_CMD" -jar "$WRAPPER_JAR" --no-transfer-progress -Dmaven.multiModuleProjectDirectory="$BASE_DIR" -Dwrapper.properties="$WRAPPER_PROPERTIES" "$@"
+exec "$JAVA_CMD" -classpath "$WRAPPER_JAR" -Dmaven.multiModuleProjectDirectory="$BASE_DIR" -Dwrapper.properties="$WRAPPER_PROPERTIES" org.apache.maven.wrapper.MavenWrapperMain "$@"

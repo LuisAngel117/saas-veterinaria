@@ -19,10 +19,17 @@
 setlocal
 
 set BASE_DIR=%~dp0
+if "%BASE_DIR:~-1%"=="\" set BASE_DIR=%BASE_DIR:~0,-1%
+
 if "%JAVA_HOME%"=="" (
-  set JAVA_CMD=java
+  for /f "delims=" %%i in ('where java 2^>NUL') do set JAVA_CMD=%%i
 ) else (
-  set JAVA_CMD=%JAVA_HOME%\bin\java
+  set JAVA_CMD=%JAVA_HOME%\bin\java.exe
+)
+
+if "%JAVA_CMD%"=="" (
+  echo ERROR: JAVA_HOME is not defined correctly.
+  exit /b 1
 )
 
 if not exist "%JAVA_CMD%" (
@@ -33,5 +40,5 @@ if not exist "%JAVA_CMD%" (
 set WRAPPER_JAR=%BASE_DIR%\.mvn\wrapper\maven-wrapper.jar
 set WRAPPER_PROPERTIES=%BASE_DIR%\.mvn\wrapper\maven-wrapper.properties
 
-"%JAVA_CMD%" -jar "%WRAPPER_JAR%" --no-transfer-progress -Dmaven.multiModuleProjectDirectory="%BASE_DIR%" -Dwrapper.properties="%WRAPPER_PROPERTIES%" %*
+"%JAVA_CMD%" -classpath "%WRAPPER_JAR%" -Dmaven.multiModuleProjectDirectory="%BASE_DIR%" -Dwrapper.properties="%WRAPPER_PROPERTIES%" org.apache.maven.wrapper.MavenWrapperMain %*
 endlocal
