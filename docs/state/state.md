@@ -24,6 +24,7 @@ Referencia: `docs/status/status.md`
 - T5: normalizaciones contractuales (estados + project-lock) + aceptación del master BACK.
 - Catálogo/plantillas de sprints: BACK y FRONT documentados en `docs/sprints/` (ver filas `SPR-*` en `docs/status/status.md`).
 - SPR-B001: ejecutado y en READY_FOR_VALIDATION (ver status/rtm/log).
+- 2026-02-11: SPR-B001 revalidado con correcciones en filtros de scoping/JWT y tests OK.
 - Masters:
   - `docs/sprints/spr-master-back.md` = ACCEPTED
   - `docs/sprints/spr-master-front.md` = DRAFT

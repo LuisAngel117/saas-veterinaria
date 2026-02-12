@@ -329,4 +329,26 @@ Formato por entrada:
 - Resultado:
   - READY_FOR_VALIDATION
 
+## 2026-02-11T19:36:37-05:00 (America/Guayaquil)
+- Sprint/Tanda: SPR-B001
+- Qué cambió:
+  - Se corrigió `OpenApiConfig` para importar `SecuritySchemeType` desde el paquete correcto.
+  - Se ajustó `JwtAuthenticationFilter` para no capturar excepciones de filtros posteriores.
+  - Se ajustó `BranchScopingFilter` para responder Problem Details en 400/403 sin lanzar excepción.
+  - Se re-ejecutaron tests del sprint y pasaron.
+- Comandos ejecutados:
+  - git status --porcelain
+  - git config user.name
+  - git config user.email
+  - git remote -v
+  - git rev-parse --abbrev-ref HEAD
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\verify-docs-eof.ps1
+  - pwsh -ExecutionPolicy Bypass -File .\scripts\verify\preflight.ps1
+  - lectura obligatoria de docs (según sprint)
+  - cmd /c "set JAVA_HOME=C:\Program Files\Java\jdk-21.0.10&& .\mvnw.cmd test"
+- Output:
+  - PEGAR OUTPUT AQUÍ
+- Resultado:
+  - READY_FOR_VALIDATION
+
 <!-- EOF -->
