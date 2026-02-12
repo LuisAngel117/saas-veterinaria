@@ -49,7 +49,9 @@ public class AuthService {
     UUID selectedBranch = resolveBranch(request.getBranchId(), branches);
 
     List<String> roleCodes = user.getRoles().stream().map(Role::getCode).toList();
-    String accessToken = jwtService.generateAccessToken(user.getId(), user.getEmail(), roleCodes, selectedBranch);
+    List<String> permissionCodes = resolvePermissions(user);
+    String accessToken = jwtService.generateAccessToken(
+        user.getId(), user.getEmail(), roleCodes, permissionCodes, selectedBranch);
 
     RefreshTokenService.IssuedToken issued = refreshTokenService.issueToken(user, selectedBranch);
 
@@ -71,7 +73,9 @@ public class AuthService {
     UUID branchId = rotated.token().getBranch().getId();
 
     List<String> roleCodes = user.getRoles().stream().map(Role::getCode).toList();
-    String accessToken = jwtService.generateAccessToken(user.getId(), user.getEmail(), roleCodes, branchId);
+    List<String> permissionCodes = resolvePermissions(user);
+    String accessToken = jwtService.generateAccessToken(
+        user.getId(), user.getEmail(), roleCodes, permissionCodes, branchId);
 
     LoginResponse response = new LoginResponse();
     response.setAccessToken(accessToken);
@@ -113,5 +117,14 @@ public class AuthService {
     }
 
     return branchId;
+  }
+
+  private List<String> resolvePermissions(UserAccount user) {
+    return user.getRoles().stream()
+        .flatMap(role -> role.getPermissions().stream())
+        .map(Permission::getCode)
+        .distinct()
+        .sorted()
+        .toList();
   }
 }

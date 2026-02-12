@@ -40,7 +40,7 @@ public class SecurityConfig {
         .requestMatchers("/api/v1/auth/**").permitAll()
         .requestMatchers("/actuator/health").permitAll()
         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-        .requestMatchers(HttpMethod.GET, "/api/v1/me").authenticated()
+        .requestMatchers(HttpMethod.GET, "/api/v1/me").hasAuthority("PERM_BRANCH_VIEW")
         .anyRequest().authenticated());
 
     http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

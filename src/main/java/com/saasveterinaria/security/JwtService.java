@@ -24,7 +24,8 @@ public class JwtService {
     this.key = buildKey(properties.getSecret());
   }
 
-  public String generateAccessToken(UUID userId, String email, List<String> roles, UUID branchId) {
+  public String generateAccessToken(UUID userId, String email, List<String> roles, List<String> permissions,
+                                    UUID branchId) {
     Instant now = Instant.now();
     Instant exp = now.plus(properties.getAccessTtl());
     return Jwts.builder()
@@ -34,6 +35,7 @@ public class JwtService {
         .setExpiration(Date.from(exp))
         .claim("email", email)
         .claim("roles", roles)
+        .claim("permissions", permissions)
         .claim("branch_id", branchId.toString())
         .signWith(key, SignatureAlgorithm.HS256)
         .compact();
@@ -46,8 +48,15 @@ public class JwtService {
     String email = claims.get("email", String.class);
     @SuppressWarnings("unchecked")
     List<String> roles = claims.get("roles", List.class);
+    List<String> permissions = claims.get("permissions", List.class);
+    if (roles == null) {
+      roles = List.of();
+    }
+    if (permissions == null) {
+      permissions = List.of();
+    }
     UUID branchId = UUID.fromString(claims.get("branch_id", String.class));
-    return new JwtPrincipal(userId, email, roles, branchId);
+    return new JwtPrincipal(userId, email, roles, permissions, branchId);
   }
 
   private static SecretKey buildKey(String secret) {
